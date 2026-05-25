@@ -59,6 +59,14 @@ The response uses the stable v1 contract marker `contractVersion: "metrics.curre
 
 The service binds only to `127.0.0.1`, owns snapshot polling, and keeps state in memory. It is not a deployment target and does not add persistence, auth, WebSockets, UI, provider APIs, or remote telemetry.
 
+The same service also exposes a disposable browser diagnostics page:
+
+```text
+http://127.0.0.1:8765/diagnostics
+```
+
+That page is static HTML/CSS/JS served locally. It reads only `GET /metrics/current` and does not establish a product UI or desktop runtime.
+
 ## Disposable Diagnostics Consumer
 
 The diagnostics consumer validates future UI consumption patterns without committing to a UI runtime:
@@ -78,6 +86,7 @@ The consumer reads only `GET /metrics/current`, renders plain terminal text, and
 - [Architecture](docs/architecture.md): target boundaries and component responsibilities, without claiming they exist yet.
 - [Codex Telemetry PoC](docs/implementation/codex-telemetry-poc.md): observed local sources, allowlist, denied fields, and unstable assumptions.
 - [Local Metrics Service](docs/implementation/local-metrics-service.md): localhost service behavior and versioned `/metrics/current` contract.
+- [Browser Diagnostics UI](docs/implementation/browser-diagnostics-ui.md): disposable static visual diagnostics page served by the local service.
 - [MVP](docs/roadmap/mvp.md): first minimal usable target.
 - [Roadmap](docs/roadmap/roadmap.md): phased direction beyond the MVP.
 - [Decisions](docs/decisions/README.md): lightweight decision log process.

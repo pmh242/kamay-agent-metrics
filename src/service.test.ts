@@ -117,6 +117,54 @@ describe("createMetricsHttpServer", () => {
     assert.equal(methodResponse.status, 405);
     assert.equal(missingResponse.status, 404);
   });
+
+  it("serves the disposable browser diagnostics UI as static HTML", async () => {
+    const service = new MetricsService({
+      pollingIntervalMs: 60_000,
+      collectSnapshot: async () => makeSnapshot()
+    });
+    const server = createMetricsHttpServer(service);
+    servers.push(server);
+    const address = await server.listen(0);
+
+    const response = await fetch(`http://${address.host}:${address.port}/diagnostics`);
+    const html = await response.text();
+
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get("content-type"), "text/html; charset=utf-8");
+    assert.match(html, /Kamay Agent Metrics Diagnostics/);
+    assert.match(html, /\/metrics\/current/);
+    assert.match(html, /metrics\.current\.v1/);
+  });
+
+  it("returns 405 for non-GET diagnostics requests", async () => {
+    const service = new MetricsService({
+      pollingIntervalMs: 60_000,
+      collectSnapshot: async () => makeSnapshot()
+    });
+    const server = createMetricsHttpServer(service);
+    servers.push(server);
+    const address = await server.listen(0);
+
+    const response = await fetch(`http://${address.host}:${address.port}/diagnostics`, { method: "POST" });
+
+    assert.equal(response.status, 405);
+    assert.equal(response.headers.get("allow"), "GET");
+  });
+
+  it("returns an empty favicon response for browser diagnostics requests", async () => {
+    const service = new MetricsService({
+      pollingIntervalMs: 60_000,
+      collectSnapshot: async () => makeSnapshot()
+    });
+    const server = createMetricsHttpServer(service);
+    servers.push(server);
+    const address = await server.listen(0);
+
+    const response = await fetch(`http://${address.host}:${address.port}/favicon.ico`);
+
+    assert.equal(response.status, 204);
+  });
 });
 
 function makeSnapshot(overrides: Partial<TelemetrySnapshot> = {}): TelemetrySnapshot {

@@ -35,6 +35,7 @@ The implemented PoC and local service cover the first local discovery and servin
 5. Keep the latest snapshot in memory inside a localhost-only service.
 6. Serve the latest snapshot to future local consumers through the versioned `GET /metrics/current` contract.
 7. Validate consumer behavior with a disposable terminal diagnostics consumer.
+8. Validate visual information hierarchy with a disposable static browser diagnostics page.
 
 The PoC and service are not a provider abstraction layer, daemon, remote HTTP service, overlay, Electron app, persistence layer, or deployment target.
 
@@ -45,6 +46,8 @@ The service layer owns polling and in-memory current-state management. Future HU
 The service currently binds only to `127.0.0.1` and exposes only `GET /metrics/current`. That response includes `contractVersion: "metrics.current.v1"` so future consumers can depend on an explicit service boundary rather than incidental JSON shape.
 
 The current diagnostics consumer is not part of the durable architecture. It exists to validate service reachability, refresh semantics, stale/offline rendering, and future consumer expectations without choosing a UI/runtime framework.
+
+The browser diagnostics page is also disposable. It is static HTML/CSS/JS served by the local service at `GET /diagnostics`, reads only `GET /metrics/current`, and does not choose Electron, Godot, overlay, pet, tray, or product UI architecture.
 
 ## Boundary Rules
 

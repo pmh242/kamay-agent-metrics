@@ -16,6 +16,7 @@ This document records the factual project state. It should be updated when reali
 - Minimal local TypeScript CLI for read-only Codex telemetry discovery.
 - Localhost-only in-memory metrics service bound to `127.0.0.1`.
 - `GET /metrics/current` endpoint for current normalized snapshot state with `contractVersion: "metrics.current.v1"`.
+- Disposable static browser diagnostics UI served at `GET /diagnostics`.
 - Service-owned polling lifecycle for snapshot refresh.
 - Disposable terminal diagnostics consumer that reads only the local service endpoint.
 - Discovery of local Codex source locations under the configured Codex home.
@@ -28,7 +29,7 @@ Not implemented:
 
 - No Electron, overlay, tray, HUD window, daemon, provider API client, persistence layer, deployment, or infrastructure.
 - No remote HTTP server; the metrics service is localhost-only and in-memory.
-- No durable UI/runtime architecture; the diagnostics consumer is disposable contract-validation tooling.
+- No durable UI/runtime architecture; the terminal and browser diagnostics surfaces are disposable contract-validation tooling.
 - No Kamay main, Kamay Adapter, Kamay-X, or Kamay Buddy integration exists yet.
 - No external Kamay ecosystem code, assets, drivers, MCP surfaces, or capabilities have been imported.
 
@@ -42,6 +43,7 @@ Not implemented:
 - Metrics service unit and HTTP tests cover polling ownership, current snapshot JSON, offline/degraded behavior, and 404/405 routing.
 - Diagnostics consumer tests cover service fetch behavior, plain-text rendering, offline/error rendering, and CLI argument parsing.
 - Contract tests cover the versioned `/metrics/current` response for online, offline/null snapshot, degraded previous-snapshot, malformed, and wrong-version cases.
+- Browser diagnostics route tests cover static HTML serving and non-GET rejection.
 
 ## Deploy-ready
 

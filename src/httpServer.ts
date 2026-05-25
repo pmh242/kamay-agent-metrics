@@ -1,5 +1,6 @@
 import http, { type IncomingMessage, type ServerResponse } from "node:http";
 
+import { DIAGNOSTICS_UI_HTML } from "./diagnosticsUi.js";
 import type { MetricsService } from "./service.js";
 
 export interface ListenAddress {
@@ -15,6 +16,22 @@ export interface MetricsHttpServer {
 export function createMetricsHttpServer(service: MetricsService): MetricsHttpServer {
   const server = http.createServer((request: IncomingMessage, response: ServerResponse) => {
     const url = new URL(request.url ?? "/", "http://127.0.0.1");
+
+    if (url.pathname === "/favicon.ico") {
+      response.statusCode = 204;
+      response.end();
+      return;
+    }
+
+    if (url.pathname === "/diagnostics") {
+      if (request.method !== "GET") {
+        response.setHeader("allow", "GET");
+        writeJson(response, 405, { error: "method_not_allowed" });
+        return;
+      }
+      writeHtml(response, 200, DIAGNOSTICS_UI_HTML);
+      return;
+    }
 
     if (url.pathname !== "/metrics/current") {
       writeJson(response, 404, { error: "not_found" });
@@ -63,4 +80,10 @@ function writeJson(response: ServerResponse, statusCode: number, body: unknown):
   response.statusCode = statusCode;
   response.setHeader("content-type", "application/json; charset=utf-8");
   response.end(JSON.stringify(body));
+}
+
+function writeHtml(response: ServerResponse, statusCode: number, body: string): void {
+  response.statusCode = statusCode;
+  response.setHeader("content-type", "text/html; charset=utf-8");
+  response.end(body);
 }
