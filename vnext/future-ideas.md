@@ -13,7 +13,8 @@ This file is speculative. Items here are not committed roadmap, MVP scope, imple
 - Comparison views across providers or models.
 - Optional redaction rules for richer local diagnostics.
 - Packaging as a desktop app, browser surface, terminal UI, or editor-integrated panel.
-- Eventual Kamay Buddy absorption after the metrics service boundary, snapshot contract, and HUD/runtime direction stabilize; companion runtime exploration may include Aseprite-backed 2D or 2.5D visual direction.
+- Eventual Kamay Buddy absorption after the metrics service boundary, snapshot contract, state vocabulary, and HUD/runtime responsibilities stabilize.
+- Future runtime prototypes may compare Electron-style control surfaces, Godot-style companion presence, hybrid architecture, and Aseprite-informed 2D or 2.5D visual workflows. These remain speculative until separately approved.
 - Kamay-X ecosystem integration for future apps, drivers, capabilities, or integrations after the telemetry/service contract is stable.
 
 ## Promotion Rule

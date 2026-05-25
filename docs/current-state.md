@@ -10,6 +10,7 @@ This document records the factual project state. It should be updated when reali
 - Incremental delivery through a narrow MVP before provider-specific extensions.
 - Future HUD work after the read-only discovery assumptions are validated further.
 - Future ecosystem alignment with Kamay main, Kamay Adapter, Kamay-X, and Kamay Buddy after local service boundaries stabilize.
+- Future Kamay Buddy runtime evaluation across Electron, Godot, hybrid, 2D, 2.5D, and Aseprite-informed asset workflows.
 
 ## Implemented
 
@@ -19,6 +20,7 @@ This document records the factual project state. It should be updated when reali
 - Disposable static browser diagnostics UI served at `GET /diagnostics`.
 - Service-owned polling lifecycle for snapshot refresh.
 - Disposable terminal diagnostics consumer that reads only the local service endpoint.
+- Docs-only Kamay Buddy runtime evaluation posture.
 - Discovery of local Codex source locations under the configured Codex home.
 - JSONL parsing with malformed-line accounting.
 - SQLite inspection through Node `node:sqlite` using read-only immutable URI mode.
@@ -30,6 +32,7 @@ Not implemented:
 - No Electron, overlay, tray, HUD window, daemon, provider API client, persistence layer, deployment, or infrastructure.
 - No remote HTTP server; the metrics service is localhost-only and in-memory.
 - No durable UI/runtime architecture; the terminal and browser diagnostics surfaces are disposable contract-validation tooling.
+- No Electron, Godot, Aseprite, overlay, tray, pet/avatar runtime, desktop hook, runtime prototype, or asset pipeline.
 - No Kamay main, Kamay Adapter, Kamay-X, or Kamay Buddy integration exists yet.
 - No external Kamay ecosystem code, assets, drivers, MCP surfaces, or capabilities have been imported.
 

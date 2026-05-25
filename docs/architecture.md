@@ -49,6 +49,14 @@ The current diagnostics consumer is not part of the durable architecture. It exi
 
 The browser diagnostics page is also disposable. It is static HTML/CSS/JS served by the local service at `GET /diagnostics`, reads only `GET /metrics/current`, and does not choose Electron, Godot, overlay, pet, tray, or product UI architecture.
 
+## Runtime Evaluation Posture
+
+Kamay Buddy runtime evaluation is now documented as research only. Electron, Godot, and hybrid approaches may be compared against the validated service contract, but no runtime is selected or implemented.
+
+The likely near-term posture is service-first and hybrid-friendly: keep telemetry discovery, normalization, polling, and `metrics.current.v1` independent; evaluate browser or Electron-style surfaces for diagnostics and controls; evaluate Godot, 2D/2.5D, and Aseprite-informed workflows only for future companion presence if product needs justify that complexity.
+
+Runtime surfaces must consume the versioned service endpoint, must not parse provider files directly, and must not own provider-specific telemetry logic.
+
 ## Boundary Rules
 
 - Collectors and adapters may know about provider-specific formats.

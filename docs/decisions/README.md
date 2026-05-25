@@ -31,6 +31,7 @@ YYYY-MM-DD-short-title.md
 - [2026-05-25: Disposable Browser Diagnostics UI](2026-05-25-disposable-browser-diagnostics-ui.md)
 - [2026-05-25: Versioned Metrics Current Contract](2026-05-25-versioned-metrics-current-contract.md)
 - [2026-05-25: Kamay Buddy Long-term Product Home, No Merge Now](2026-05-25-kamay-buddy-reference-only.md)
+- [2026-05-25: Kamay Buddy Runtime Evaluation Posture](2026-05-25-kamay-buddy-runtime-evaluation-posture.md)
 
 Known project direction from the baseline:
 
