@@ -11,6 +11,7 @@ This document records the factual project state. It should be updated when reali
 - Future HUD work after the read-only discovery assumptions are validated further.
 - Future ecosystem alignment with Kamay main, Kamay Adapter, Kamay-X, and Kamay Buddy after local service boundaries stabilize.
 - Future Kamay Buddy runtime evaluation across Electron, Godot, hybrid, 2D, 2.5D, and Aseprite-informed asset workflows.
+- Future runtime spike findings may inform Kamay Buddy direction after they are documented and reviewed.
 
 ## Implemented
 
@@ -21,6 +22,7 @@ This document records the factual project state. It should be updated when reali
 - Service-owned polling lifecycle for snapshot refresh.
 - Disposable terminal diagnostics consumer that reads only the local service endpoint.
 - Docs-only Kamay Buddy runtime evaluation posture.
+- Isolated disposable Electron transparent-window runtime spike under `experiments/`.
 - Discovery of local Codex source locations under the configured Codex home.
 - JSONL parsing with malformed-line accounting.
 - SQLite inspection through Node `node:sqlite` using read-only immutable URI mode.
@@ -29,10 +31,11 @@ This document records the factual project state. It should be updated when reali
 
 Not implemented:
 
-- No Electron, overlay, tray, HUD window, daemon, provider API client, persistence layer, deployment, or infrastructure.
+- No durable Electron product runtime, overlay, tray, HUD window, daemon, provider API client, persistence layer, deployment, or infrastructure.
 - No remote HTTP server; the metrics service is localhost-only and in-memory.
 - No durable UI/runtime architecture; the terminal and browser diagnostics surfaces are disposable contract-validation tooling.
-- No Electron, Godot, Aseprite, overlay, tray, pet/avatar runtime, desktop hook, runtime prototype, or asset pipeline.
+- No Godot, Aseprite, overlay, tray, pet/avatar runtime, desktop hook, durable runtime prototype, or asset pipeline.
+- The Electron spike is disposable experiment code only; it is not a product runtime or HUD implementation.
 - No Kamay main, Kamay Adapter, Kamay-X, or Kamay Buddy integration exists yet.
 - No external Kamay ecosystem code, assets, drivers, MCP surfaces, or capabilities have been imported.
 
@@ -47,6 +50,7 @@ Not implemented:
 - Diagnostics consumer tests cover service fetch behavior, plain-text rendering, offline/error rendering, and CLI argument parsing.
 - Contract tests cover the versioned `/metrics/current` response for online, offline/null snapshot, degraded previous-snapshot, malformed, and wrong-version cases.
 - Browser diagnostics route tests cover static HTML serving and non-GET rejection.
+- Root typecheck, build, and test validation covers the telemetry/service backbone; the Electron spike is validated separately through experiment-local install and launch checks.
 
 ## Deploy-ready
 
@@ -67,6 +71,7 @@ Not implemented:
 - No production readiness, deployment readiness, or cross-machine reliability has been verified.
 - A live metadata before/after comparison was inconclusive for proving no provider-state writes because Codex itself was actively writing during validation.
 - Ecosystem placement is documented as product/architecture intent only, not implemented integration.
+- Electron transparent-window and always-on-top feasibility are experiment findings only, not runtime selection or production readiness.
 
 ## Update Rule
 

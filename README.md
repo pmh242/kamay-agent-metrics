@@ -88,6 +88,7 @@ The consumer reads only `GET /metrics/current`, renders plain terminal text, and
 - [Local Metrics Service](docs/implementation/local-metrics-service.md): localhost service behavior and versioned `/metrics/current` contract.
 - [Browser Diagnostics UI](docs/implementation/browser-diagnostics-ui.md): disposable static visual diagnostics page served by the local service.
 - [Kamay Buddy Runtime Evaluation](docs/runtime/kamay-buddy-runtime-evaluation.md): docs-only Electron, Godot, hybrid, 2D/2.5D, and Aseprite tradeoff review.
+- [Electron Transparent Window Spike](docs/implementation/electron-transparent-window-spike.md): isolated disposable Electron feasibility experiment.
 - [MVP](docs/roadmap/mvp.md): first minimal usable target.
 - [Roadmap](docs/roadmap/roadmap.md): phased direction beyond the MVP.
 - [Decisions](docs/decisions/README.md): lightweight decision log process.

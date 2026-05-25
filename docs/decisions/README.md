@@ -32,6 +32,7 @@ YYYY-MM-DD-short-title.md
 - [2026-05-25: Versioned Metrics Current Contract](2026-05-25-versioned-metrics-current-contract.md)
 - [2026-05-25: Kamay Buddy Long-term Product Home, No Merge Now](2026-05-25-kamay-buddy-reference-only.md)
 - [2026-05-25: Kamay Buddy Runtime Evaluation Posture](2026-05-25-kamay-buddy-runtime-evaluation-posture.md)
+- [2026-05-25: Electron Transparent Window Runtime Spike](2026-05-25-electron-transparent-window-runtime-spike.md)
 
 Known project direction from the baseline:
 

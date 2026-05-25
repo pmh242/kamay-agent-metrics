@@ -15,6 +15,7 @@ This file is speculative. Items here are not committed roadmap, MVP scope, imple
 - Packaging as a desktop app, browser surface, terminal UI, or editor-integrated panel.
 - Eventual Kamay Buddy absorption after the metrics service boundary, snapshot contract, state vocabulary, and HUD/runtime responsibilities stabilize.
 - Future runtime prototypes may compare Electron-style control surfaces, Godot-style companion presence, hybrid architecture, and Aseprite-informed 2D or 2.5D visual workflows. These remain speculative until separately approved.
+- Electron transparent-window spike findings may later inform companion runtime direction, but the spike itself remains disposable experiment code.
 - Kamay-X ecosystem integration for future apps, drivers, capabilities, or integrations after the telemetry/service contract is stable.
 
 ## Promotion Rule
