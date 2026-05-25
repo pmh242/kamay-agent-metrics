@@ -6,8 +6,8 @@ Kamay Agent Metrics is a planned provider-agnostic local agent metrics and HUD s
 
 This repository is at local PoC stage.
 
-- Implementation: minimal read-only Codex telemetry discovery CLI.
-- Runtime: local CLI only.
+- Implementation: read-only Codex telemetry CLI, localhost metrics service, and disposable diagnostics consumer.
+- Runtime: local CLI and localhost-only in-memory service.
 - Tests: TypeScript build/typecheck and focused unit tests.
 - Deployment: not present.
 - Verification: local PoC validation only.
@@ -55,6 +55,8 @@ The local service exposes the current in-memory snapshot for future consumers:
 GET http://127.0.0.1:8765/metrics/current
 ```
 
+The response uses the stable v1 contract marker `contractVersion: "metrics.current.v1"`.
+
 The service binds only to `127.0.0.1`, owns snapshot polling, and keeps state in memory. It is not a deployment target and does not add persistence, auth, WebSockets, UI, provider APIs, or remote telemetry.
 
 ## Disposable Diagnostics Consumer
@@ -75,6 +77,7 @@ The consumer reads only `GET /metrics/current`, renders plain terminal text, and
 - [Principles](docs/principles.md): constraints that keep the project provider-agnostic, read-only, privacy-safe, and incremental.
 - [Architecture](docs/architecture.md): target boundaries and component responsibilities, without claiming they exist yet.
 - [Codex Telemetry PoC](docs/implementation/codex-telemetry-poc.md): observed local sources, allowlist, denied fields, and unstable assumptions.
+- [Local Metrics Service](docs/implementation/local-metrics-service.md): localhost service behavior and versioned `/metrics/current` contract.
 - [MVP](docs/roadmap/mvp.md): first minimal usable target.
 - [Roadmap](docs/roadmap/roadmap.md): phased direction beyond the MVP.
 - [Decisions](docs/decisions/README.md): lightweight decision log process.

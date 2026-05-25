@@ -1,10 +1,10 @@
-import type { MetricsServiceState } from "./service.js";
+import { isMetricsCurrentResponse, type MetricsCurrentResponse } from "./contract.js";
 
 export interface ConsumerFetchOk {
   reachable: true;
   url: string;
   receivedAt: string;
-  data: MetricsServiceState;
+  data: MetricsCurrentResponse;
 }
 
 export interface ConsumerFetchError {
@@ -35,7 +35,7 @@ export async function fetchMetricsCurrent(
     }
 
     const parsed: unknown = await response.json();
-    if (!isMetricsServiceState(parsed)) {
+    if (!isMetricsCurrentResponse(parsed)) {
       return {
         reachable: false,
         url,
@@ -58,12 +58,4 @@ export async function fetchMetricsCurrent(
       error: error instanceof Error ? error.message : String(error)
     };
   }
-}
-
-function isMetricsServiceState(value: unknown): value is MetricsServiceState {
-  if (typeof value !== "object" || value === null || Array.isArray(value)) {
-    return false;
-  }
-  const record = value as Record<string, unknown>;
-  return "service" in record && "sourceHealth" in record && "snapshot" in record;
 }

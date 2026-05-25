@@ -1,22 +1,10 @@
 import { collectTelemetrySnapshot } from "./snapshot.js";
+import { METRICS_CURRENT_CONTRACT_VERSION, type MetricsCurrentResponse } from "./contract.js";
 import type { SourceObservation, TelemetrySnapshot } from "./types.js";
 
 export type ServiceStatus = "ok" | "degraded" | "offline";
 
-export interface MetricsServiceState {
-  service: {
-    status: ServiceStatus;
-    startedAt: string;
-    lastUpdatedAt: string | null;
-    pollingIntervalMs: number;
-    lastError: string | null;
-  };
-  snapshot: TelemetrySnapshot | null;
-  sourceHealth: {
-    status: ServiceStatus;
-    warnings: string[];
-  };
-}
+export type MetricsServiceState = MetricsCurrentResponse;
 
 export interface MetricsServiceOptions {
   pollingIntervalMs: number;
@@ -78,6 +66,7 @@ export class MetricsService {
   getCurrent(): MetricsServiceState {
     const sourceHealth = deriveSourceHealth(this.snapshot, this.lastError);
     return {
+      contractVersion: METRICS_CURRENT_CONTRACT_VERSION,
       service: {
         status: sourceHealth.status,
         startedAt: this.startedAt,

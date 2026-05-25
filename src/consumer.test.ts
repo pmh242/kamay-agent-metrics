@@ -1,9 +1,10 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 
+import { METRICS_CURRENT_CONTRACT_VERSION } from "./contract.js";
 import { fetchMetricsCurrent } from "./consumer.js";
 import { renderConsumerState } from "./consumerRender.js";
-import type { MetricsServiceState } from "./service.js";
+import type { MetricsCurrentResponse } from "./contract.js";
 
 describe("fetchMetricsCurrent", () => {
   it("uses only the configured service URL", async () => {
@@ -36,6 +37,21 @@ describe("fetchMetricsCurrent", () => {
 
     assert.equal(result.reachable, false);
     assert.equal(result.error, "connection refused");
+  });
+
+  it("rejects wrong-version metrics responses as malformed", async () => {
+    const result = await fetchMetricsCurrent("http://127.0.0.1:8765/metrics/current", async () => {
+      return new Response(JSON.stringify({
+        ...makeServiceState(),
+        contractVersion: "metrics.current.v2"
+      }), {
+        status: 200,
+        headers: { "content-type": "application/json" }
+      });
+    });
+
+    assert.equal(result.reachable, false);
+    assert.equal(result.error, "Service returned malformed metrics JSON");
   });
 });
 
@@ -94,8 +110,9 @@ describe("renderConsumerState", () => {
   });
 });
 
-function makeServiceState(overrides: Partial<MetricsServiceState> = {}): MetricsServiceState {
+function makeServiceState(overrides: Partial<MetricsCurrentResponse> = {}): MetricsCurrentResponse {
   return {
+    contractVersion: METRICS_CURRENT_CONTRACT_VERSION,
     service: {
       status: "ok",
       startedAt: "2026-05-25T00:00:00.000Z",

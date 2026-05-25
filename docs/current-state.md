@@ -15,7 +15,7 @@ This document records the factual project state. It should be updated when reali
 
 - Minimal local TypeScript CLI for read-only Codex telemetry discovery.
 - Localhost-only in-memory metrics service bound to `127.0.0.1`.
-- `GET /metrics/current` endpoint for current normalized snapshot state.
+- `GET /metrics/current` endpoint for current normalized snapshot state with `contractVersion: "metrics.current.v1"`.
 - Service-owned polling lifecycle for snapshot refresh.
 - Disposable terminal diagnostics consumer that reads only the local service endpoint.
 - Discovery of local Codex source locations under the configured Codex home.
@@ -41,6 +41,7 @@ Not implemented:
 - `pnpm poc --interval-ms 1000` produced repeated snapshots.
 - Metrics service unit and HTTP tests cover polling ownership, current snapshot JSON, offline/degraded behavior, and 404/405 routing.
 - Diagnostics consumer tests cover service fetch behavior, plain-text rendering, offline/error rendering, and CLI argument parsing.
+- Contract tests cover the versioned `/metrics/current` response for online, offline/null snapshot, degraded previous-snapshot, malformed, and wrong-version cases.
 
 ## Deploy-ready
 
@@ -55,6 +56,7 @@ Not implemented:
 
 - Local PoC runtime behavior has been manually validated against a live local Codex state on May 25, 2026.
 - Local metrics service runtime behavior has been manually validated against `GET /metrics/current`.
+- Versioned metrics contract marker `metrics.current.v1` has been manually observed from `GET /metrics/current`.
 - Disposable diagnostics consumer has been manually validated against the local service endpoint and service-offline behavior.
 - Sensitive content fields are denied by code and covered by unit test.
 - No production readiness, deployment readiness, or cross-machine reliability has been verified.

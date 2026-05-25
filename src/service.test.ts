@@ -1,6 +1,7 @@
 import { afterEach, describe, it } from "node:test";
 import assert from "node:assert/strict";
 
+import { METRICS_CURRENT_CONTRACT_VERSION } from "./contract.js";
 import { createMetricsHttpServer } from "./httpServer.js";
 import { MetricsService } from "./service.js";
 import type { TelemetrySnapshot } from "./types.js";
@@ -95,6 +96,7 @@ describe("createMetricsHttpServer", () => {
 
     assert.equal(response.status, 200);
     assert.equal(response.headers.get("content-type"), "application/json; charset=utf-8");
+    assert.equal(body.contractVersion, METRICS_CURRENT_CONTRACT_VERSION);
     assert.ok("service" in body);
     assert.ok("sourceHealth" in body);
     assert.ok("snapshot" in body);

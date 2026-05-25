@@ -28,6 +28,7 @@ YYYY-MM-DD-short-title.md
 - [2026-05-25: Read-only Codex Telemetry Discovery PoC](2026-05-25-read-only-codex-telemetry-poc.md)
 - [2026-05-25: Localhost In-memory Metrics Service Boundary](2026-05-25-local-metrics-service-boundary.md)
 - [2026-05-25: Disposable Diagnostics Consumer](2026-05-25-disposable-diagnostics-consumer.md)
+- [2026-05-25: Versioned Metrics Current Contract](2026-05-25-versioned-metrics-current-contract.md)
 - [2026-05-25: Kamay Buddy Long-term Product Home, No Merge Now](2026-05-25-kamay-buddy-reference-only.md)
 
 Known project direction from the baseline:

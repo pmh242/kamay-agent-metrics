@@ -33,7 +33,7 @@ The implemented PoC and local service cover the first local discovery and servin
 3. Extract allowlisted operational metadata.
 4. Normalize the result into a console `TelemetrySnapshot`-like object.
 5. Keep the latest snapshot in memory inside a localhost-only service.
-6. Serve the latest snapshot to future local consumers through `GET /metrics/current`.
+6. Serve the latest snapshot to future local consumers through the versioned `GET /metrics/current` contract.
 7. Validate consumer behavior with a disposable terminal diagnostics consumer.
 
 The PoC and service are not a provider abstraction layer, daemon, remote HTTP service, overlay, Electron app, persistence layer, or deployment target.
@@ -42,7 +42,7 @@ The PoC and service are not a provider abstraction layer, daemon, remote HTTP se
 
 The service layer owns polling and in-memory current-state management. Future HUD, Kamay Buddy, Kamay-X, or runtime consumers should read normalized snapshots from this boundary instead of talking directly to provider-specific collectors.
 
-The service currently binds only to `127.0.0.1` and exposes only `GET /metrics/current`.
+The service currently binds only to `127.0.0.1` and exposes only `GET /metrics/current`. That response includes `contractVersion: "metrics.current.v1"` so future consumers can depend on an explicit service boundary rather than incidental JSON shape.
 
 The current diagnostics consumer is not part of the durable architecture. It exists to validate service reachability, refresh semantics, stale/offline rendering, and future consumer expectations without choosing a UI/runtime framework.
 
@@ -52,7 +52,7 @@ The current diagnostics consumer is not part of the durable architecture. It exi
 - The normalizer should define project-owned concepts.
 - The HUD should not parse raw provider telemetry.
 - Future consumers should not own telemetry polling.
-- Future consumers should use the service endpoint rather than parsing provider files directly.
+- Future consumers should use the versioned service endpoint rather than parsing provider files directly.
 - Storage or state should start local and minimal.
 - Cross-process services, background daemons, cloud sync, and deployment targets are out of scope until separately decided.
 - Ecosystem integration must wait until the local service boundary and snapshot contract are stable.
