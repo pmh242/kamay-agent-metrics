@@ -21,3 +21,5 @@ The spike must not read provider files, modify the telemetry/service backbone, a
 - Electron feasibility can be evaluated without contaminating the durable service architecture.
 - Future runtime prototypes must continue to consume the service contract instead of parsing provider files directly.
 - Transparent-window and always-on-top observations are research findings, not production readiness claims.
+- The first spike supports Electron as viable for isolated HUD/runtime shell experimentation, but does not select Electron as the final Kamay Buddy runtime.
+- Godot, 2D, 2.5D, and Aseprite-informed companion directions remain future exploration paths.

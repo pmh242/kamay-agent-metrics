@@ -11,8 +11,9 @@ It is research and architecture evaluation only. It does not approve Electron, G
 - A localhost-only in-memory metrics service exists.
 - `GET /metrics/current` exposes the versioned `metrics.current.v1` contract.
 - Disposable terminal and browser diagnostics consumers validate the service contract.
+- An isolated Electron transparent-window spike exists under `experiments/` and consumes only the versioned local metrics service.
 
-No Kamay Buddy runtime, desktop shell, overlay, animation system, asset pipeline, or repo merge is implemented.
+No durable Kamay Buddy runtime, product desktop shell, overlay, animation system, asset pipeline, or repo merge is implemented.
 
 ## Evaluation Frame
 
@@ -21,6 +22,12 @@ The service boundary should remain independent of runtime choice. Future compani
 The near-term runtime question is not "which engine owns metrics?" It is "which surface best presents already-normalized local state?"
 
 ## Electron Direction
+
+Evidence-backed posture:
+
+- Electron is viable for isolated HUD/runtime shell experimentation against the current `metrics.current.v1` service boundary.
+- The spike launched without changing the telemetry/service backbone and observed always-on-top behavior programmatically.
+- Visual transparency is still human-verification pending; requested Electron flags are not the same as confirmed product feasibility.
 
 Likely fit:
 
@@ -37,6 +44,7 @@ Risks:
 Boundary rule:
 
 - Electron-like surfaces may read the service contract, but must not absorb telemetry discovery, provider parsing, or local Codex file access.
+- Electron remains a candidate for further isolated experiments, not the selected final product runtime.
 
 ## Godot Direction
 
@@ -66,6 +74,8 @@ Likely future direction:
 - Allow Kamay Buddy to become the long-term product home only after the service boundary, snapshot contract, and runtime responsibilities are stable.
 
 This is not a hard commitment to a hybrid product. It is the lowest-risk evaluation posture because it preserves the service boundary while allowing separate visual/runtime experiments later.
+
+The Electron spike strengthens this posture: runtime shells can be evaluated independently while the telemetry/service backbone remains durable and runtime-independent.
 
 ## 2D vs 2.5D Direction
 
@@ -124,6 +134,7 @@ No Aseprite automation, asset import, export scripts, or runtime integration is 
 - Whether companion visuals should be 2D, 2.5D, or non-character UI.
 - Whether Aseprite becomes part of the production asset workflow.
 - Whether overlay, tray, always-on-top, or desktop hooks are desirable.
+- Whether transparent windows are visually acceptable on the target desktop environments.
 - When, how, or whether this repository is absorbed into Kamay Buddy or Kamay-X.
 
 ## Likely Next Research Path

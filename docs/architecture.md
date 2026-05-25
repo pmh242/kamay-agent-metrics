@@ -51,6 +51,8 @@ The browser diagnostics page is also disposable. It is static HTML/CSS/JS served
 
 The Electron transparent-window spike is isolated under `experiments/` and is not part of the durable service architecture. It consumes only `GET http://127.0.0.1:8765/metrics/current`, requests transparent and always-on-top behavior for feasibility research, and must not own provider discovery, telemetry polling, normalization, persistence, or provider file access.
 
+The spike provides evidence that Electron can act as an isolated HUD/runtime shell experiment over the versioned service contract. It does not change the durable architecture: the telemetry/service backbone remains runtime-independent, and Electron is not selected as the final product runtime.
+
 ## Runtime Evaluation Posture
 
 Kamay Buddy runtime evaluation is now documented as research only. Electron, Godot, and hybrid approaches may be compared against the validated service contract, but no runtime is selected or implemented.
@@ -60,6 +62,8 @@ The likely near-term posture is service-first and hybrid-friendly: keep telemetr
 Runtime surfaces must consume the versioned service endpoint, must not parse provider files directly, and must not own provider-specific telemetry logic.
 
 Runtime spikes may live under `experiments/` when explicitly approved. Findings from those spikes can inform future Kamay Buddy direction, but experiment code should remain disposable until a separate decision promotes a runtime path.
+
+Godot, 2D, 2.5D, and Aseprite-informed workflows remain future exploration paths. They are not displaced by the Electron spike.
 
 ## Boundary Rules
 

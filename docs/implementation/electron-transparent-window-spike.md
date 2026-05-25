@@ -8,6 +8,8 @@ The spike reduces uncertainty around transparent windows, always-on-top behavior
 
 It is disposable runtime research. It is not product UI, not a HUD, and not a runtime selection.
 
+The current evidence supports Electron as viable for continued isolated HUD/runtime shell experimentation over the versioned local service contract. It does not make Electron the final product runtime.
+
 ## Service Dependency
 
 The spike consumes only:
@@ -38,3 +40,10 @@ Because the renderer is loaded from a local file, the Electron main process perf
 ## Feasibility Notes
 
 Transparent-window and always-on-top behavior depend on the local OS and desktop session. Validation should record whether those behaviors are observed, blocked, or inconclusive instead of treating the requested Electron flags as proof of product feasibility.
+
+Current posture after the first spike:
+
+- Launch and service-contract consumption were validated.
+- Always-on-top behavior was observed programmatically.
+- Visual transparency remains human-verification pending.
+- The telemetry/service backbone remains durable and runtime-independent.

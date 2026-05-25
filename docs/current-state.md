@@ -12,6 +12,7 @@ This document records the factual project state. It should be updated when reali
 - Future ecosystem alignment with Kamay main, Kamay Adapter, Kamay-X, and Kamay Buddy after local service boundaries stabilize.
 - Future Kamay Buddy runtime evaluation across Electron, Godot, hybrid, 2D, 2.5D, and Aseprite-informed asset workflows.
 - Future runtime spike findings may inform Kamay Buddy direction after they are documented and reviewed.
+- Future human visual verification of Electron transparent-window behavior on target desktop environments.
 
 ## Implemented
 
@@ -36,6 +37,7 @@ Not implemented:
 - No durable UI/runtime architecture; the terminal and browser diagnostics surfaces are disposable contract-validation tooling.
 - No Godot, Aseprite, overlay, tray, pet/avatar runtime, desktop hook, durable runtime prototype, or asset pipeline.
 - The Electron spike is disposable experiment code only; it is not a product runtime or HUD implementation.
+- Electron is viable for further isolated HUD/runtime shell experimentation, but runtime choice remains undecided.
 - No Kamay main, Kamay Adapter, Kamay-X, or Kamay Buddy integration exists yet.
 - No external Kamay ecosystem code, assets, drivers, MCP surfaces, or capabilities have been imported.
 
@@ -71,6 +73,9 @@ Not implemented:
 - No production readiness, deployment readiness, or cross-machine reliability has been verified.
 - A live metadata before/after comparison was inconclusive for proving no provider-state writes because Codex itself was actively writing during validation.
 - Ecosystem placement is documented as product/architecture intent only, not implemented integration.
+- The Electron spike launched as an isolated runtime shell and consumed the versioned local metrics service without telemetry/service backbone changes.
+- Electron always-on-top behavior was observed programmatically during smoke validation.
+- Electron visual transparency has not yet been human-verified and remains pending.
 - Electron transparent-window and always-on-top feasibility are experiment findings only, not runtime selection or production readiness.
 
 ## Update Rule
