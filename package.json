@@ -8,7 +8,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "pnpm build && node --test \"dist/**/*.test.js\"",
     "poc": "node dist/cli.js",
-    "service": "node dist/serviceCli.js"
+    "service": "node dist/serviceCli.js",
+    "consumer": "node dist/consumerCli.js"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",

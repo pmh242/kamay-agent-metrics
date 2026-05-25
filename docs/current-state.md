@@ -17,6 +17,7 @@ This document records the factual project state. It should be updated when reali
 - Localhost-only in-memory metrics service bound to `127.0.0.1`.
 - `GET /metrics/current` endpoint for current normalized snapshot state.
 - Service-owned polling lifecycle for snapshot refresh.
+- Disposable terminal diagnostics consumer that reads only the local service endpoint.
 - Discovery of local Codex source locations under the configured Codex home.
 - JSONL parsing with malformed-line accounting.
 - SQLite inspection through Node `node:sqlite` using read-only immutable URI mode.
@@ -27,6 +28,7 @@ Not implemented:
 
 - No Electron, overlay, tray, HUD window, daemon, provider API client, persistence layer, deployment, or infrastructure.
 - No remote HTTP server; the metrics service is localhost-only and in-memory.
+- No durable UI/runtime architecture; the diagnostics consumer is disposable contract-validation tooling.
 - No Kamay main, Kamay Adapter, Kamay-X, or Kamay Buddy integration exists yet.
 - No external Kamay ecosystem code, assets, drivers, MCP surfaces, or capabilities have been imported.
 
@@ -38,6 +40,7 @@ Not implemented:
 - `pnpm poc --once` produced a local normalized snapshot.
 - `pnpm poc --interval-ms 1000` produced repeated snapshots.
 - Metrics service unit and HTTP tests cover polling ownership, current snapshot JSON, offline/degraded behavior, and 404/405 routing.
+- Diagnostics consumer tests cover service fetch behavior, plain-text rendering, offline/error rendering, and CLI argument parsing.
 
 ## Deploy-ready
 
@@ -52,6 +55,7 @@ Not implemented:
 
 - Local PoC runtime behavior has been manually validated against a live local Codex state on May 25, 2026.
 - Local metrics service runtime behavior has been manually validated against `GET /metrics/current`.
+- Disposable diagnostics consumer has been manually validated against the local service endpoint and service-offline behavior.
 - Sensitive content fields are denied by code and covered by unit test.
 - No production readiness, deployment readiness, or cross-machine reliability has been verified.
 - A live metadata before/after comparison was inconclusive for proving no provider-state writes because Codex itself was actively writing during validation.

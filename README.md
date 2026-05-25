@@ -41,6 +41,8 @@ pnpm build
 pnpm poc --once
 pnpm poc --interval-ms 1000
 pnpm service -- --port 8765 --interval-ms 1000
+pnpm consumer -- --once
+pnpm consumer -- --interval-ms 1000
 ```
 
 The CLI reads local Codex state only. It does not start a server, create a database, run an overlay, or call provider APIs.
@@ -54,6 +56,18 @@ GET http://127.0.0.1:8765/metrics/current
 ```
 
 The service binds only to `127.0.0.1`, owns snapshot polling, and keeps state in memory. It is not a deployment target and does not add persistence, auth, WebSockets, UI, provider APIs, or remote telemetry.
+
+## Disposable Diagnostics Consumer
+
+The diagnostics consumer validates future UI consumption patterns without committing to a UI runtime:
+
+```powershell
+pnpm service -- --port 8765 --interval-ms 1000
+pnpm consumer -- --once
+pnpm consumer -- --interval-ms 1000
+```
+
+The consumer reads only `GET /metrics/current`, renders plain terminal text, and is disposable validation tooling. It does not read provider files directly and is not a HUD, overlay, tray, Electron app, Godot runtime, pet, or product UI.
 
 ## Documentation Map
 
