@@ -40,9 +40,20 @@ pnpm install
 pnpm build
 pnpm poc --once
 pnpm poc --interval-ms 1000
+pnpm service -- --port 8765 --interval-ms 1000
 ```
 
 The CLI reads local Codex state only. It does not start a server, create a database, run an overlay, or call provider APIs.
+
+## Local Metrics Service
+
+The local service exposes the current in-memory snapshot for future consumers:
+
+```text
+GET http://127.0.0.1:8765/metrics/current
+```
+
+The service binds only to `127.0.0.1`, owns snapshot polling, and keeps state in memory. It is not a deployment target and does not add persistence, auth, WebSockets, UI, provider APIs, or remote telemetry.
 
 ## Documentation Map
 

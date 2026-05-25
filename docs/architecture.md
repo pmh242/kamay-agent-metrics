@@ -26,20 +26,29 @@ Kamay Agent Metrics is expected to use a local, provider-agnostic pipeline:
 
 ## Current PoC Boundary
 
-The implemented PoC covers only the first local discovery slice:
+The implemented PoC and local service cover the first local discovery and serving slice:
 
 1. Discover local Codex state locations.
 2. Inspect JSONL and SQLite sources in read-only mode.
 3. Extract allowlisted operational metadata.
 4. Normalize the result into a console `TelemetrySnapshot`-like object.
+5. Keep the latest snapshot in memory inside a localhost-only service.
+6. Serve the latest snapshot to future local consumers through `GET /metrics/current`.
 
-The PoC is not a provider abstraction layer, daemon, HTTP service, overlay, Electron app, persistence layer, or deployment target.
+The PoC and service are not a provider abstraction layer, daemon, remote HTTP service, overlay, Electron app, persistence layer, or deployment target.
+
+## Local Service Boundary
+
+The service layer owns polling and in-memory current-state management. Future HUD, Kamay Buddy, Kamay-X, or runtime consumers should read normalized snapshots from this boundary instead of talking directly to provider-specific collectors.
+
+The service currently binds only to `127.0.0.1` and exposes only `GET /metrics/current`.
 
 ## Boundary Rules
 
 - Collectors and adapters may know about provider-specific formats.
 - The normalizer should define project-owned concepts.
 - The HUD should not parse raw provider telemetry.
+- Future consumers should not own telemetry polling.
 - Storage or state should start local and minimal.
 - Cross-process services, background daemons, cloud sync, and deployment targets are out of scope until separately decided.
 - Ecosystem integration must wait until the local service boundary and snapshot contract are stable.
