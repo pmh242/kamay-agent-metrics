@@ -9,6 +9,7 @@ This document records the factual project state. It should be updated when reali
 - Privacy-safe defaults that avoid collecting secrets or unnecessary content.
 - Incremental delivery through a narrow MVP before provider-specific extensions.
 - Future HUD work after the read-only discovery assumptions are validated further.
+- Future ecosystem alignment with Kamay main, Kamay Adapter, Kamay-X, and Kamay Buddy after local service boundaries stabilize.
 
 ## Implemented
 
@@ -22,6 +23,8 @@ This document records the factual project state. It should be updated when reali
 Not implemented:
 
 - No Electron, overlay, tray, HUD window, daemon, HTTP server, provider API client, persistence layer, deployment, or infrastructure.
+- No Kamay main, Kamay Adapter, Kamay-X, or Kamay Buddy integration exists yet.
+- No external Kamay ecosystem code, assets, drivers, MCP surfaces, or capabilities have been imported.
 
 ## Tested
 
@@ -46,6 +49,7 @@ Not implemented:
 - Sensitive content fields are denied by code and covered by unit test.
 - No production readiness, deployment readiness, or cross-machine reliability has been verified.
 - A live metadata before/after comparison was inconclusive for proving no provider-state writes because Codex itself was actively writing during validation.
+- Ecosystem placement is documented as product/architecture intent only, not implemented integration.
 
 ## Update Rule
 

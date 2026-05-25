@@ -14,6 +14,18 @@ This repository is at local PoC stage.
 
 Do not treat this project as production-ready, deploy-ready, or feature-complete.
 
+## Ecosystem Role
+
+Within the broader Kamay ecosystem, this repository is the short-term telemetry and service proving ground.
+
+- Kamay main: local OS, kernel, and governance direction.
+- Kamay Adapter: remote repo-read driver and delegation layer direction.
+- Kamay-X: future apps, drivers, capabilities, and integrations.
+- Kamay Buddy: intended long-term unified companion and product home.
+- Kamay Agent Metrics: independent near-term place to stabilize read-only telemetry discovery, normalization, and snapshot contracts before absorption into Kamay Buddy or Kamay-X is considered.
+
+No Kamay, Kamay Adapter, Kamay-X, or Kamay Buddy code is imported here today.
+
 ## Local PoC Command
 
 Requirements:

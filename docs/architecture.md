@@ -2,6 +2,18 @@
 
 This is the target architecture direction. It is not implemented yet.
 
+## Kamay Ecosystem Placement
+
+Kamay Agent Metrics is the independent short-term telemetry and service proving ground within the broader Kamay ecosystem.
+
+- Kamay main is the local OS, kernel, and governance direction.
+- Kamay Adapter is the remote repo-read driver and delegation layer direction.
+- Kamay-X is the future home for apps, drivers, capabilities, and integrations.
+- Kamay Buddy is the intended long-term unified companion and product home.
+- Kamay Agent Metrics should stabilize read-only telemetry discovery, normalization, and snapshot contracts so the work can later be absorbed into Kamay Buddy or Kamay-X without pulling provider-specific assumptions into the companion runtime.
+
+This is ecosystem intent only. No Kamay main, Kamay Adapter, Kamay-X, or Kamay Buddy code is imported or integrated in the current repository.
+
 ## Target Boundaries
 
 Kamay Agent Metrics is expected to use a local, provider-agnostic pipeline:
@@ -30,6 +42,7 @@ The PoC is not a provider abstraction layer, daemon, HTTP service, overlay, Elec
 - The HUD should not parse raw provider telemetry.
 - Storage or state should start local and minimal.
 - Cross-process services, background daemons, cloud sync, and deployment targets are out of scope until separately decided.
+- Ecosystem integration must wait until the local service boundary and snapshot contract are stable.
 
 ## Target Data Posture
 

@@ -14,6 +14,7 @@ This file is speculative. Items here are not committed roadmap, MVP scope, imple
 - Optional redaction rules for richer local diagnostics.
 - Packaging as a desktop app, browser surface, terminal UI, or editor-integrated panel.
 - Eventual Kamay Buddy absorption after the metrics service boundary, snapshot contract, and HUD/runtime direction stabilize; companion runtime exploration may include Aseprite-backed 2D or 2.5D visual direction.
+- Kamay-X ecosystem integration for future apps, drivers, capabilities, or integrations after the telemetry/service contract is stable.
 
 ## Promotion Rule
 
