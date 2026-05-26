@@ -57,6 +57,8 @@ The lifecycle bridge experiment validates runtime/service behavior over polling 
 
 The signal mapping experiment interprets the versioned service response into disposable runtime labels and CSS tones. It is not part of the service contract, does not introduce product behavior, and can change independently of `metrics.current.v1`.
 
+The signal UX experiment adds priority, persistence, visual weight, and attention-style metadata inside the isolated Electron spike. These rules are interaction findings only. They may help evaluate future companion expression, but they do not define durable product behavior, pet/avatar logic, animation architecture, or final runtime vocabulary.
+
 ## Runtime Evaluation Posture
 
 Kamay Buddy runtime evaluation is now documented as research only. Electron, Godot, and hybrid approaches may be compared against the validated service contract, but no runtime is selected or implemented.
@@ -72,6 +74,8 @@ Godot, 2D, 2.5D, and Aseprite-informed workflows remain future exploration paths
 Polling remains the approved runtime/service bridge until a later decision proves realtime infrastructure is necessary. WebSockets, event buses, runtime-owned telemetry state, and orchestration frameworks are not part of the current architecture.
 
 Signal mappings may inform future companion expression, but pet/avatar logic, personality, dialogue, memory, behavior trees, animation systems, and durable product behavior remain out of scope.
+
+Signal UX findings may inform attention design, but runtime surfaces must remain quiet by default and avoid promoting transient telemetry states into product behavior without a separate decision.
 
 ## Boundary Rules
 

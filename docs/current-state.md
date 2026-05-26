@@ -15,6 +15,7 @@ This document records the factual project state. It should be updated when reali
 - Future human visual verification of Electron transparent-window behavior on target desktop environments.
 - Future runtime work may build on validated polling lifecycle semantics after a durable runtime direction is separately chosen.
 - Future companion expression may build on validated signal mappings only after product behavior is separately approved.
+- Future companion expression may use signal UX findings only after vocabulary, runtime direction, and product behavior are separately approved.
 
 ## Implemented
 
@@ -28,6 +29,7 @@ This document records the factual project state. It should be updated when reali
 - Isolated disposable Electron transparent-window runtime spike under `experiments/`.
 - Experiment-local runtime/service lifecycle bridge validation under `experiments/`.
 - Experiment-local runtime signal mapping for simple labels, glyphs, reasons, and CSS tone changes.
+- Experiment-local runtime signal UX metadata and CSS-only visual priority refinements.
 - Discovery of local Codex source locations under the configured Codex home.
 - JSONL parsing with malformed-line accounting.
 - SQLite inspection through Node `node:sqlite` using read-only immutable URI mode.
@@ -60,6 +62,7 @@ Not implemented:
 - Root typecheck, build, and test validation covers the telemetry/service backbone; the Electron spike is validated separately through experiment-local install and launch checks.
 - Runtime lifecycle bridge behavior is validated through an experiment-local harness, not root service architecture changes.
 - Runtime signal mapping is validated through an experiment-local harness, not root service architecture changes.
+- Runtime signal UX priority and persistence behavior is validated through an experiment-local harness, not root service architecture changes.
 
 ## Deploy-ready
 
@@ -86,6 +89,7 @@ Not implemented:
 - Electron transparent-window and always-on-top feasibility are experiment findings only, not runtime selection or production readiness.
 - Runtime lifecycle validation demonstrates startup-before-service, startup-after-service, reconnect, offline/null snapshot, stale, degraded/recovered, real-service compatibility, and multi-consumer polling behavior as experiment findings.
 - Runtime signal validation maps `idle`, `active`, `degraded`, `offline`, `reconnecting`, `stale`, `error`, and `unknown` as experiment findings only.
+- Runtime signal UX validation covers priority ordering, persistence timing, higher-priority interruption, and conservative visual treatment as experiment findings only.
 
 ## Update Rule
 

@@ -13,56 +13,88 @@
       label: "Idle",
       glyph: "ID",
       tone: "neutral",
-      reason: "Service is healthy and no active thread is resolved."
+      reason: "Service is healthy and no active thread is resolved.",
+      priority: 1,
+      persistenceMs: 800,
+      visualWeight: "quiet",
+      attentionStyle: "steady"
     },
     active: {
       signal: "active",
       label: "Active",
       glyph: "AC",
       tone: "good",
-      reason: "Service is healthy and the active thread is current."
+      reason: "Service is healthy and the active thread is current.",
+      priority: 2,
+      persistenceMs: 1200,
+      visualWeight: "calm",
+      attentionStyle: "steady"
     },
     degraded: {
       signal: "degraded",
       label: "Degraded",
       glyph: "DG",
       tone: "warn",
-      reason: "Service or source health is degraded."
+      reason: "Service or source health is degraded.",
+      priority: 3,
+      persistenceMs: 2200,
+      visualWeight: "visible",
+      attentionStyle: "glow"
     },
     offline: {
       signal: "offline",
       label: "Offline",
       glyph: "OF",
       tone: "bad",
-      reason: "Metrics service is unavailable or reports offline health."
+      reason: "Metrics service is unavailable or reports offline health.",
+      priority: 4,
+      persistenceMs: 3200,
+      visualWeight: "strong",
+      attentionStyle: "muted-pulse"
     },
     reconnecting: {
       signal: "reconnecting",
       label: "Reconnecting",
       glyph: "RC",
       tone: "warn",
-      reason: "Service was reachable before, but the latest poll failed."
+      reason: "Service was reachable before, but the latest poll failed.",
+      priority: 3,
+      persistenceMs: 2600,
+      visualWeight: "visible",
+      attentionStyle: "pulse"
     },
     stale: {
       signal: "stale",
       label: "Stale",
       glyph: "ST",
       tone: "warn",
-      reason: "The active thread is stale or has unknown freshness."
+      reason: "The active thread is stale or has unknown freshness.",
+      priority: 3,
+      persistenceMs: 2200,
+      visualWeight: "visible",
+      attentionStyle: "glow"
     },
     error: {
       signal: "error",
       label: "Error",
       glyph: "ER",
       tone: "bad",
-      reason: "The latest poll failed with an HTTP or parsing error."
+      reason: "The latest poll failed with an HTTP or parsing error.",
+      priority: 4,
+      persistenceMs: 3200,
+      visualWeight: "strong",
+      attentionStyle: "muted-pulse"
     },
     unknown: {
       signal: "unknown",
       label: "Unknown",
       glyph: "UN",
       tone: "neutral",
-      reason: "The metrics response does not match the expected v1 contract."
+      reason: "The metrics response does not match the expected v1 contract.",
+      priority: 4,
+      persistenceMs: 2600,
+      visualWeight: "strong",
+      attentionStyle: "glow"
     }
   };
 
@@ -70,6 +102,13 @@
     return {
       hadReachable: false,
       previousSignal: null
+    };
+  }
+
+  function createSignalUxMemory() {
+    return {
+      currentSignal: null,
+      holdUntilMs: 0
     };
   }
 
@@ -86,6 +125,34 @@
         hadReachable: state.hadReachable,
         previousSignal: state.previousSignal
       }
+    };
+  }
+
+  function applySignalUx(nextSignal, memory, nowMs) {
+    const state = memory || createSignalUxMemory();
+    const observedAtMs = Number.isFinite(nowMs) ? nowMs : Date.now();
+    const current = state.currentSignal;
+
+    if (current &&
+        current.signal !== nextSignal.signal &&
+        observedAtMs < state.holdUntilMs &&
+        current.priority >= nextSignal.priority) {
+      return {
+        ...current,
+        transition: "held",
+        pendingSignal: nextSignal.signal,
+        remainingMs: state.holdUntilMs - observedAtMs
+      };
+    }
+
+    const transition = current && current.signal !== nextSignal.signal ? "changed" : "steady";
+    state.currentSignal = nextSignal;
+    state.holdUntilMs = observedAtMs + nextSignal.persistenceMs;
+    return {
+      ...nextSignal,
+      transition,
+      pendingSignal: null,
+      remainingMs: nextSignal.persistenceMs
     };
   }
 
@@ -153,7 +220,9 @@
     CONTRACT_VERSION,
     SIGNALS,
     createSignalMemory,
+    createSignalUxMemory,
     mapRuntimeSignal,
+    applySignalUx,
     isMetricsCurrentResponse
   };
 });

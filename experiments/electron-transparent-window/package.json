@@ -8,7 +8,8 @@
     "start": "electron .",
     "smoke": "node smoke.cjs",
     "lifecycle": "node lifecycle.cjs",
-    "signals": "node signals.cjs"
+    "signals": "node signals.cjs",
+    "signal-ux": "node signalUx.cjs"
   },
   "devDependencies": {
     "electron": "42.2.0"
