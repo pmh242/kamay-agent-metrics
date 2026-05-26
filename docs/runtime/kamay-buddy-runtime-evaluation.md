@@ -13,6 +13,7 @@ It is research and architecture evaluation only. It does not approve Electron, G
 - Disposable terminal and browser diagnostics consumers validate the service contract.
 - An isolated Electron transparent-window spike exists under `experiments/` and consumes only the versioned local metrics service.
 - An experiment-local lifecycle harness validates polling-based startup, reconnect, stale/offline, recovery, and multi-consumer behavior.
+- An experiment-local signal mapper validates a small runtime signal vocabulary without adding pet or product behavior.
 
 No durable Kamay Buddy runtime, product desktop shell, overlay, animation system, asset pipeline, or repo merge is implemented.
 
@@ -80,6 +81,8 @@ The Electron spike strengthens this posture: runtime shells can be evaluated ind
 
 The lifecycle bridge strengthens the same posture: runtime surfaces can tolerate service availability changes without owning telemetry state or requiring realtime infrastructure.
 
+The signal mapping experiment adds a thin interpretation layer for labels and visual tones. It is useful for companion research, but it is not a commitment to character behavior, personality, dialogue, or final product states.
+
 ## 2D vs 2.5D Direction
 
 Likely direction:
@@ -123,6 +126,7 @@ No Aseprite automation, asset import, export scripts, or runtime integration is 
 - Runtime surfaces do not introduce persistence without a separate decision.
 - Runtime experiments must remain replaceable until a product runtime is explicitly selected.
 - Runtime surfaces should treat service unavailability, stale snapshots, and recovery as normal lifecycle states.
+- Runtime surfaces may map service state into disposable visual signals, but should not turn those signals into product behavior without a separate decision.
 - Provider-specific assumptions stay behind the telemetry/service boundary.
 
 ## Risks

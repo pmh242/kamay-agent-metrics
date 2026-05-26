@@ -14,6 +14,7 @@ This document records the factual project state. It should be updated when reali
 - Future runtime spike findings may inform Kamay Buddy direction after they are documented and reviewed.
 - Future human visual verification of Electron transparent-window behavior on target desktop environments.
 - Future runtime work may build on validated polling lifecycle semantics after a durable runtime direction is separately chosen.
+- Future companion expression may build on validated signal mappings only after product behavior is separately approved.
 
 ## Implemented
 
@@ -26,6 +27,7 @@ This document records the factual project state. It should be updated when reali
 - Docs-only Kamay Buddy runtime evaluation posture.
 - Isolated disposable Electron transparent-window runtime spike under `experiments/`.
 - Experiment-local runtime/service lifecycle bridge validation under `experiments/`.
+- Experiment-local runtime signal mapping for simple labels, glyphs, reasons, and CSS tone changes.
 - Discovery of local Codex source locations under the configured Codex home.
 - JSONL parsing with malformed-line accounting.
 - SQLite inspection through Node `node:sqlite` using read-only immutable URI mode.
@@ -38,6 +40,7 @@ Not implemented:
 - No remote HTTP server; the metrics service is localhost-only and in-memory.
 - No durable UI/runtime architecture; the terminal and browser diagnostics surfaces are disposable contract-validation tooling.
 - No Godot, Aseprite, overlay, tray, pet/avatar runtime, desktop hook, durable runtime prototype, or asset pipeline.
+- No personality, dialogue, lore, memory, behavior tree, AI agent behavior, or pet logic.
 - The Electron spike is disposable experiment code only; it is not a product runtime or HUD implementation.
 - Electron is viable for further isolated HUD/runtime shell experimentation, but runtime choice remains undecided.
 - No Kamay main, Kamay Adapter, Kamay-X, or Kamay Buddy integration exists yet.
@@ -56,6 +59,7 @@ Not implemented:
 - Browser diagnostics route tests cover static HTML serving and non-GET rejection.
 - Root typecheck, build, and test validation covers the telemetry/service backbone; the Electron spike is validated separately through experiment-local install and launch checks.
 - Runtime lifecycle bridge behavior is validated through an experiment-local harness, not root service architecture changes.
+- Runtime signal mapping is validated through an experiment-local harness, not root service architecture changes.
 
 ## Deploy-ready
 
@@ -81,6 +85,7 @@ Not implemented:
 - Electron visual transparency has not yet been human-verified and remains pending.
 - Electron transparent-window and always-on-top feasibility are experiment findings only, not runtime selection or production readiness.
 - Runtime lifecycle validation demonstrates startup-before-service, startup-after-service, reconnect, offline/null snapshot, stale, degraded/recovered, real-service compatibility, and multi-consumer polling behavior as experiment findings.
+- Runtime signal validation maps `idle`, `active`, `degraded`, `offline`, `reconnecting`, `stale`, `error`, and `unknown` as experiment findings only.
 
 ## Update Rule
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; img-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; img-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
     >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kamay Metrics Runtime Spike</title>
@@ -35,6 +35,19 @@
         backdrop-filter: blur(14px);
       }
 
+      main.tone-good {
+        box-shadow: 0 0 22px rgba(70, 190, 130, 0.34), 0 18px 40px rgba(0, 0, 0, 0.34);
+      }
+
+      main.tone-warn {
+        box-shadow: 0 0 20px rgba(238, 180, 72, 0.32), 0 18px 40px rgba(0, 0, 0, 0.34);
+      }
+
+      main.tone-bad {
+        opacity: 0.82;
+        box-shadow: 0 0 20px rgba(220, 86, 96, 0.36), 0 18px 40px rgba(0, 0, 0, 0.34);
+      }
+
       header {
         display: flex;
         align-items: center;
@@ -60,6 +73,43 @@
       .ok { background: #1f7a4d; }
       .degraded { background: #8b6716; }
       .offline { background: #8a2f38; }
+
+      .signal {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .glyph {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .signal-title {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .signal-reason {
+        margin: 2px 0 0;
+        color: #b7c2d0;
+        font-size: 11px;
+        line-height: 1.3;
+      }
+
+      .tone-good .glyph { color: #9ff0bd; }
+      .tone-warn .glyph { color: #ffd27a; }
+      .tone-bad .glyph { color: #ff98a0; }
 
       dl {
         display: grid;
@@ -89,18 +139,31 @@
     </style>
   </head>
   <body>
-    <main>
+    <main id="surface" class="tone-neutral">
       <header>
         <h1>Kamay Runtime Spike</h1>
         <span id="state" class="status offline">starting</span>
       </header>
+      <section class="signal" aria-label="Runtime signal">
+        <div id="signalGlyph" class="glyph">UN</div>
+        <div>
+          <p id="signalLabel" class="signal-title">Unknown</p>
+          <p id="signalReason" class="signal-reason">Waiting for first metrics poll.</p>
+        </div>
+      </section>
       <dl id="metrics"></dl>
       <div id="warnings" class="warnings"></div>
     </main>
+    <script src="./signalMapper.js"></script>
     <script>
       const CONTRACT_VERSION = "metrics.current.v1";
       const POLL_INTERVAL_MS = 2000;
+      const signalMemory = window.kamaySignalMapper.createSignalMemory();
+      const surface = document.querySelector("#surface");
       const state = document.querySelector("#state");
+      const signalGlyph = document.querySelector("#signalGlyph");
+      const signalLabel = document.querySelector("#signalLabel");
+      const signalReason = document.querySelector("#signalReason");
       const metrics = document.querySelector("#metrics");
       const warnings = document.querySelector("#warnings");
 
@@ -117,6 +180,14 @@
       function setState(status) {
         state.textContent = status;
         state.className = `status ${status === "ok" ? "ok" : status === "degraded" ? "degraded" : "offline"}`;
+      }
+
+      function renderSignal(response) {
+        const signal = window.kamaySignalMapper.mapRuntimeSignal(response, signalMemory);
+        surface.className = `tone-${signal.tone}`;
+        signalGlyph.textContent = signal.glyph;
+        signalLabel.textContent = signal.label;
+        signalReason.textContent = signal.reason;
       }
 
       function validateContract(value) {
@@ -174,6 +245,7 @@
 
       async function refresh() {
         const response = await window.kamayMetrics.fetchCurrent();
+        renderSignal(response);
         renderResponse(response);
       }
 
