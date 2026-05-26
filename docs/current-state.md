@@ -13,6 +13,7 @@ This document records the factual project state. It should be updated when reali
 - Future Kamay Buddy runtime evaluation across Electron, Godot, hybrid, 2D, 2.5D, and Aseprite-informed asset workflows.
 - Future runtime spike findings may inform Kamay Buddy direction after they are documented and reviewed.
 - Future human visual verification of Electron transparent-window behavior on target desktop environments.
+- Future runtime work may build on validated polling lifecycle semantics after a durable runtime direction is separately chosen.
 
 ## Implemented
 
@@ -24,6 +25,7 @@ This document records the factual project state. It should be updated when reali
 - Disposable terminal diagnostics consumer that reads only the local service endpoint.
 - Docs-only Kamay Buddy runtime evaluation posture.
 - Isolated disposable Electron transparent-window runtime spike under `experiments/`.
+- Experiment-local runtime/service lifecycle bridge validation under `experiments/`.
 - Discovery of local Codex source locations under the configured Codex home.
 - JSONL parsing with malformed-line accounting.
 - SQLite inspection through Node `node:sqlite` using read-only immutable URI mode.
@@ -53,6 +55,7 @@ Not implemented:
 - Contract tests cover the versioned `/metrics/current` response for online, offline/null snapshot, degraded previous-snapshot, malformed, and wrong-version cases.
 - Browser diagnostics route tests cover static HTML serving and non-GET rejection.
 - Root typecheck, build, and test validation covers the telemetry/service backbone; the Electron spike is validated separately through experiment-local install and launch checks.
+- Runtime lifecycle bridge behavior is validated through an experiment-local harness, not root service architecture changes.
 
 ## Deploy-ready
 
@@ -77,6 +80,7 @@ Not implemented:
 - Electron always-on-top behavior was observed programmatically during smoke validation.
 - Electron visual transparency has not yet been human-verified and remains pending.
 - Electron transparent-window and always-on-top feasibility are experiment findings only, not runtime selection or production readiness.
+- Runtime lifecycle validation demonstrates startup-before-service, startup-after-service, reconnect, offline/null snapshot, stale, degraded/recovered, real-service compatibility, and multi-consumer polling behavior as experiment findings.
 
 ## Update Rule
 

@@ -33,6 +33,7 @@ YYYY-MM-DD-short-title.md
 - [2026-05-25: Kamay Buddy Long-term Product Home, No Merge Now](2026-05-25-kamay-buddy-reference-only.md)
 - [2026-05-25: Kamay Buddy Runtime Evaluation Posture](2026-05-25-kamay-buddy-runtime-evaluation-posture.md)
 - [2026-05-25: Electron Transparent Window Runtime Spike](2026-05-25-electron-transparent-window-runtime-spike.md)
+- [2026-05-25: Runtime Service Lifecycle Bridge](2026-05-25-runtime-service-lifecycle-bridge.md)
 
 Known project direction from the baseline:
 

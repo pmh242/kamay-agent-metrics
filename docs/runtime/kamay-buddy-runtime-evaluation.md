@@ -12,6 +12,7 @@ It is research and architecture evaluation only. It does not approve Electron, G
 - `GET /metrics/current` exposes the versioned `metrics.current.v1` contract.
 - Disposable terminal and browser diagnostics consumers validate the service contract.
 - An isolated Electron transparent-window spike exists under `experiments/` and consumes only the versioned local metrics service.
+- An experiment-local lifecycle harness validates polling-based startup, reconnect, stale/offline, recovery, and multi-consumer behavior.
 
 No durable Kamay Buddy runtime, product desktop shell, overlay, animation system, asset pipeline, or repo merge is implemented.
 
@@ -77,6 +78,8 @@ This is not a hard commitment to a hybrid product. It is the lowest-risk evaluat
 
 The Electron spike strengthens this posture: runtime shells can be evaluated independently while the telemetry/service backbone remains durable and runtime-independent.
 
+The lifecycle bridge strengthens the same posture: runtime surfaces can tolerate service availability changes without owning telemetry state or requiring realtime infrastructure.
+
 ## 2D vs 2.5D Direction
 
 Likely direction:
@@ -119,6 +122,7 @@ No Aseprite automation, asset import, export scripts, or runtime integration is 
 - Runtime surfaces do not own telemetry polling or normalization.
 - Runtime surfaces do not introduce persistence without a separate decision.
 - Runtime experiments must remain replaceable until a product runtime is explicitly selected.
+- Runtime surfaces should treat service unavailability, stale snapshots, and recovery as normal lifecycle states.
 - Provider-specific assumptions stay behind the telemetry/service boundary.
 
 ## Risks

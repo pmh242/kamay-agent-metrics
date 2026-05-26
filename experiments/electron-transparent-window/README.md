@@ -25,6 +25,12 @@ For a short launch smoke check:
 pnpm --dir experiments/electron-transparent-window smoke
 ```
 
+For lifecycle behavior checks:
+
+```powershell
+pnpm --dir experiments/electron-transparent-window lifecycle
+```
+
 ## Boundaries
 
 - Reads only `http://127.0.0.1:8765/metrics/current`.
@@ -40,3 +46,4 @@ pnpm --dir experiments/electron-transparent-window smoke
 - Does `alwaysOnTop` stay active enough for a future companion surface?
 - Is a 2000ms render cadence readable for lightweight local status?
 - Does the service contract provide enough state for a minimal companion diagnostic surface?
+- Can runtime startup, reconnect, offline/stale transitions, and multi-consumer polling stay service-boundary-only?

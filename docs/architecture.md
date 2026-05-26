@@ -53,6 +53,8 @@ The Electron transparent-window spike is isolated under `experiments/` and is no
 
 The spike provides evidence that Electron can act as an isolated HUD/runtime shell experiment over the versioned service contract. It does not change the durable architecture: the telemetry/service backbone remains runtime-independent, and Electron is not selected as the final product runtime.
 
+The lifecycle bridge experiment validates runtime/service behavior over polling only. Runtime startup order, reconnect, offline/stale transitions, recovery, and multi-consumer coexistence are runtime-consumer concerns; they do not move telemetry discovery, normalization, polling ownership, or source health authority out of the local service.
+
 ## Runtime Evaluation Posture
 
 Kamay Buddy runtime evaluation is now documented as research only. Electron, Godot, and hybrid approaches may be compared against the validated service contract, but no runtime is selected or implemented.
@@ -64,6 +66,8 @@ Runtime surfaces must consume the versioned service endpoint, must not parse pro
 Runtime spikes may live under `experiments/` when explicitly approved. Findings from those spikes can inform future Kamay Buddy direction, but experiment code should remain disposable until a separate decision promotes a runtime path.
 
 Godot, 2D, 2.5D, and Aseprite-informed workflows remain future exploration paths. They are not displaced by the Electron spike.
+
+Polling remains the approved runtime/service bridge until a later decision proves realtime infrastructure is necessary. WebSockets, event buses, runtime-owned telemetry state, and orchestration frameworks are not part of the current architecture.
 
 ## Boundary Rules
 

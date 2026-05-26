@@ -6,7 +6,8 @@
   "main": "main.cjs",
   "scripts": {
     "start": "electron .",
-    "smoke": "node smoke.cjs"
+    "smoke": "node smoke.cjs",
+    "lifecycle": "node lifecycle.cjs"
   },
   "devDependencies": {
     "electron": "42.2.0"
