@@ -17,7 +17,11 @@
       priority: 1,
       persistenceMs: 800,
       visualWeight: "quiet",
-      attentionStyle: "steady"
+      attentionStyle: "steady",
+      fadeAfterMs: 2000,
+      escalateAfterMs: null,
+      cooldownMs: 800,
+      recoveryMs: 900
     },
     active: {
       signal: "active",
@@ -28,7 +32,11 @@
       priority: 2,
       persistenceMs: 1200,
       visualWeight: "calm",
-      attentionStyle: "steady"
+      attentionStyle: "steady",
+      fadeAfterMs: 7000,
+      escalateAfterMs: null,
+      cooldownMs: 900,
+      recoveryMs: 1000
     },
     degraded: {
       signal: "degraded",
@@ -39,7 +47,11 @@
       priority: 3,
       persistenceMs: 2200,
       visualWeight: "visible",
-      attentionStyle: "glow"
+      attentionStyle: "glow",
+      fadeAfterMs: 5000,
+      escalateAfterMs: 9000,
+      cooldownMs: 2200,
+      recoveryMs: 1400
     },
     offline: {
       signal: "offline",
@@ -50,7 +62,11 @@
       priority: 4,
       persistenceMs: 3200,
       visualWeight: "strong",
-      attentionStyle: "muted-pulse"
+      attentionStyle: "muted-pulse",
+      fadeAfterMs: 7000,
+      escalateAfterMs: 9000,
+      cooldownMs: 4200,
+      recoveryMs: 1800
     },
     reconnecting: {
       signal: "reconnecting",
@@ -61,7 +77,11 @@
       priority: 3,
       persistenceMs: 2600,
       visualWeight: "visible",
-      attentionStyle: "pulse"
+      attentionStyle: "pulse",
+      fadeAfterMs: 4500,
+      escalateAfterMs: 6500,
+      cooldownMs: 3200,
+      recoveryMs: 1400
     },
     stale: {
       signal: "stale",
@@ -72,7 +92,11 @@
       priority: 3,
       persistenceMs: 2200,
       visualWeight: "visible",
-      attentionStyle: "glow"
+      attentionStyle: "glow",
+      fadeAfterMs: 5000,
+      escalateAfterMs: 8500,
+      cooldownMs: 2200,
+      recoveryMs: 1400
     },
     error: {
       signal: "error",
@@ -83,7 +107,11 @@
       priority: 4,
       persistenceMs: 3200,
       visualWeight: "strong",
-      attentionStyle: "muted-pulse"
+      attentionStyle: "muted-pulse",
+      fadeAfterMs: 6500,
+      escalateAfterMs: 8500,
+      cooldownMs: 4200,
+      recoveryMs: 1800
     },
     unknown: {
       signal: "unknown",
@@ -94,7 +122,11 @@
       priority: 4,
       persistenceMs: 2600,
       visualWeight: "strong",
-      attentionStyle: "glow"
+      attentionStyle: "glow",
+      fadeAfterMs: 5000,
+      escalateAfterMs: null,
+      cooldownMs: 2600,
+      recoveryMs: 1200
     }
   };
 
@@ -109,6 +141,17 @@
     return {
       currentSignal: null,
       holdUntilMs: 0
+    };
+  }
+
+  function createTemporalSignalMemory() {
+    return {
+      currentSignalName: null,
+      currentSinceMs: 0,
+      previousSignalName: null,
+      recoveredUntilMs: 0,
+      cooldownUntilMs: 0,
+      lastHighAttentionSignalName: null
     };
   }
 
@@ -153,6 +196,60 @@
       transition,
       pendingSignal: null,
       remainingMs: nextSignal.persistenceMs
+    };
+  }
+
+  function applyTemporalSignalTiming(nextSignal, memory, nowMs) {
+    const state = memory || createTemporalSignalMemory();
+    const observedAtMs = Number.isFinite(nowMs) ? nowMs : Date.now();
+    const previousName = state.currentSignalName;
+    const changed = previousName !== nextSignal.signal;
+
+    if (changed) {
+      state.previousSignalName = previousName;
+      state.currentSignalName = nextSignal.signal;
+      state.currentSinceMs = observedAtMs;
+
+      if (isRecoveryTransition(previousName, nextSignal.signal)) {
+        state.recoveredUntilMs = observedAtMs + nextSignal.recoveryMs;
+        state.cooldownUntilMs = observedAtMs + cooldownFor(previousName);
+        state.lastHighAttentionSignalName = previousName;
+      }
+    }
+
+    const elapsedMs = Math.max(0, observedAtMs - state.currentSinceMs);
+    const inRecovery = observedAtMs < state.recoveredUntilMs;
+    const inCooldown = observedAtMs < state.cooldownUntilMs;
+    let temporalPhase = changed ? "fresh" : "fresh";
+    let temporalWeight = nextSignal.visualWeight;
+    let temporalAttentionStyle = nextSignal.attentionStyle;
+
+    if (inRecovery && isCalmSignal(nextSignal.signal)) {
+      temporalPhase = "recovered";
+      temporalWeight = "calm";
+      temporalAttentionStyle = "glow";
+    } else if (inCooldown && isHighAttentionSignal(nextSignal)) {
+      temporalPhase = "cooldown";
+      temporalWeight = nextSignal.priority >= 4 ? "visible" : "calm";
+      temporalAttentionStyle = "steady";
+    } else if (shouldEscalate(nextSignal, elapsedMs)) {
+      temporalPhase = "escalated";
+      temporalWeight = "strong";
+      temporalAttentionStyle = nextSignal.attentionStyle === "steady" ? "glow" : nextSignal.attentionStyle;
+    } else if (shouldFade(nextSignal, elapsedMs)) {
+      temporalPhase = "faded";
+      temporalWeight = softenVisualWeight(nextSignal.visualWeight);
+      temporalAttentionStyle = nextSignal.attentionStyle === "pulse" ? "glow" : "steady";
+    }
+
+    return {
+      ...nextSignal,
+      temporalPhase,
+      temporalWeight,
+      temporalAttentionStyle,
+      elapsedMs,
+      recoveredUntilMs: state.recoveredUntilMs,
+      cooldownUntilMs: state.cooldownUntilMs
     };
   }
 
@@ -216,13 +313,55 @@
     return typeof value === "object" && value !== null && !Array.isArray(value);
   }
 
+  function shouldFade(signal, elapsedMs) {
+    return Number.isInteger(signal.fadeAfterMs) && elapsedMs >= signal.fadeAfterMs;
+  }
+
+  function shouldEscalate(signal, elapsedMs) {
+    return Number.isInteger(signal.escalateAfterMs) && elapsedMs >= signal.escalateAfterMs;
+  }
+
+  function softenVisualWeight(value) {
+    if (value === "strong") {
+      return "visible";
+    }
+    if (value === "visible") {
+      return "calm";
+    }
+    return value;
+  }
+
+  function isRecoveryTransition(previousName, nextName) {
+    return isHighAttentionSignalName(previousName) && isCalmSignal(nextName);
+  }
+
+  function isHighAttentionSignal(signal) {
+    return signal && signal.priority >= 3;
+  }
+
+  function isHighAttentionSignalName(value) {
+    const signal = value ? SIGNALS[value] : null;
+    return isHighAttentionSignal(signal);
+  }
+
+  function isCalmSignal(value) {
+    return value === "active" || value === "idle";
+  }
+
+  function cooldownFor(signalName) {
+    const signal = signalName ? SIGNALS[signalName] : null;
+    return signal && Number.isInteger(signal.cooldownMs) ? signal.cooldownMs : 0;
+  }
+
   return {
     CONTRACT_VERSION,
     SIGNALS,
     createSignalMemory,
     createSignalUxMemory,
+    createTemporalSignalMemory,
     mapRuntimeSignal,
     applySignalUx,
+    applyTemporalSignalTiming,
     isMetricsCurrentResponse
   };
 });

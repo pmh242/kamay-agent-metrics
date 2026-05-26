@@ -59,6 +59,8 @@ The signal mapping experiment interprets the versioned service response into dis
 
 The signal UX experiment adds priority, persistence, visual weight, and attention-style metadata inside the isolated Electron spike. These rules are interaction findings only. They may help evaluate future companion expression, but they do not define durable product behavior, pet/avatar logic, animation architecture, or final runtime vocabulary.
 
+The temporal signal experiment adds persistence, fade, escalation, recovery, and cooldown timing inside the isolated Electron spike. These timing rules are disposable attention-design findings only. They do not create a runtime state machine, behavior tree, animation framework, pet/avatar system, memory system, or durable companion attention model.
+
 ## Runtime Evaluation Posture
 
 Kamay Buddy runtime evaluation is now documented as research only. Electron, Godot, and hybrid approaches may be compared against the validated service contract, but no runtime is selected or implemented.
@@ -76,6 +78,8 @@ Polling remains the approved runtime/service bridge until a later decision prove
 Signal mappings may inform future companion expression, but pet/avatar logic, personality, dialogue, memory, behavior trees, animation systems, and durable product behavior remain out of scope.
 
 Signal UX findings may inform attention design, but runtime surfaces must remain quiet by default and avoid promoting transient telemetry states into product behavior without a separate decision.
+
+Temporal signal findings may inform future attention behavior, but time-based escalation and recovery must remain experiment-local until human visual review and product direction justify promotion.
 
 ## Boundary Rules
 

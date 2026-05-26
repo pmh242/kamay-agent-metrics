@@ -69,6 +69,29 @@
         border-color: rgba(255, 255, 255, 0.42);
       }
 
+      main.phase-held {
+        border-style: dashed;
+      }
+
+      main.phase-faded {
+        opacity: 0.72;
+      }
+
+      main.phase-escalated {
+        border-color: rgba(255, 255, 255, 0.58);
+        box-shadow: 0 0 28px rgba(255, 210, 122, 0.34), 0 18px 40px rgba(0, 0, 0, 0.34);
+      }
+
+      main.phase-recovered {
+        border-color: rgba(130, 220, 170, 0.54);
+        box-shadow: 0 0 22px rgba(70, 190, 130, 0.32), 0 18px 40px rgba(0, 0, 0, 0.34);
+      }
+
+      main.phase-cooldown {
+        opacity: 0.86;
+        filter: saturate(0.82);
+      }
+
       header {
         display: flex;
         align-items: center;
@@ -147,6 +170,15 @@
         filter: saturate(0.86);
       }
 
+      .phase-escalated .glyph {
+        transform: scale(1.12);
+      }
+
+      .phase-faded .glyph,
+      .phase-cooldown .glyph {
+        transform: scale(0.96);
+      }
+
       .priority {
         display: inline-block;
         margin-left: 6px;
@@ -208,6 +240,7 @@
       const POLL_INTERVAL_MS = 2000;
       const signalMemory = window.kamaySignalMapper.createSignalMemory();
       const signalUxMemory = window.kamaySignalMapper.createSignalUxMemory();
+      const temporalSignalMemory = window.kamaySignalMapper.createTemporalSignalMemory();
       const surface = document.querySelector("#surface");
       const state = document.querySelector("#state");
       const signalGlyph = document.querySelector("#signalGlyph");
@@ -234,14 +267,32 @@
 
       function renderSignal(response) {
         const rawSignal = window.kamaySignalMapper.mapRuntimeSignal(response, signalMemory);
-        const signal = window.kamaySignalMapper.applySignalUx(rawSignal, signalUxMemory, Date.now());
-        surface.className = `tone-${signal.tone} weight-${signal.visualWeight} attention-${signal.attentionStyle}`;
+        const uxSignal = window.kamaySignalMapper.applySignalUx(rawSignal, signalUxMemory, Date.now());
+        const signal = window.kamaySignalMapper.applyTemporalSignalTiming(uxSignal, temporalSignalMemory, Date.now());
+        surface.className = `tone-${signal.tone} weight-${signal.temporalWeight} attention-${signal.temporalAttentionStyle} phase-${signal.temporalPhase}`;
         signalGlyph.textContent = signal.glyph;
         signalLabel.textContent = signal.label;
         signalPriority.textContent = `P${signal.priority}`;
-        signalReason.textContent = signal.transition === "held" && signal.pendingSignal
-          ? `${signal.reason} Holding briefly before ${signal.pendingSignal}.`
-          : signal.reason;
+        signalReason.textContent = describeSignalReason(signal);
+      }
+
+      function describeSignalReason(signal) {
+        if (signal.transition === "held" && signal.pendingSignal) {
+          return `${signal.reason} Holding briefly before ${signal.pendingSignal}.`;
+        }
+        if (signal.temporalPhase === "recovered") {
+          return `${signal.reason} Recovery visible before returning to calm.`;
+        }
+        if (signal.temporalPhase === "cooldown") {
+          return `${signal.reason} Cooldown is suppressing repeat attention.`;
+        }
+        if (signal.temporalPhase === "escalated") {
+          return `${signal.reason} Sustained state is escalated.`;
+        }
+        if (signal.temporalPhase === "faded") {
+          return `${signal.reason} Sustained state is faded to reduce fatigue.`;
+        }
+        return signal.reason;
       }
 
       function validateContract(value) {

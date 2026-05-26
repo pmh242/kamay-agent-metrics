@@ -9,7 +9,8 @@
     "smoke": "node smoke.cjs",
     "lifecycle": "node lifecycle.cjs",
     "signals": "node signals.cjs",
-    "signal-ux": "node signalUx.cjs"
+    "signal-ux": "node signalUx.cjs",
+    "temporal-signals": "node temporalSignals.cjs"
   },
   "devDependencies": {
     "electron": "42.2.0"

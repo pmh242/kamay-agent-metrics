@@ -36,6 +36,7 @@ YYYY-MM-DD-short-title.md
 - [2026-05-25: Runtime Service Lifecycle Bridge](2026-05-25-runtime-service-lifecycle-bridge.md)
 - [2026-05-26: Runtime Signal Mapping Experiment](2026-05-26-runtime-signal-mapping-experiment.md)
 - [2026-05-26: Runtime Signal UX Experiment](2026-05-26-runtime-signal-ux-experiment.md)
+- [2026-05-26: Runtime Temporal Signal Experiment](2026-05-26-runtime-temporal-signal-experiment.md)
 
 Known project direction from the baseline:
 

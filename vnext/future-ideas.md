@@ -19,6 +19,7 @@ This file is speculative. Items here are not committed roadmap, MVP scope, imple
 - Future runtime bridges may revisit realtime/event transports only if polling over `metrics.current.v1` proves insufficient.
 - Future companion expression may extend validated signal mappings into richer visual behavior only after pet/avatar, personality, and runtime direction are separately approved.
 - Future companion attention design may build on signal UX findings, but final vocabulary, motion, sound, and behavior should remain speculative until product direction is approved.
+- Future temporal attention design may build on signal timing findings, but durable escalation, recovery, cooldown, and fatigue rules remain speculative until human review and product direction are approved.
 - Kamay-X ecosystem integration for future apps, drivers, capabilities, or integrations after the telemetry/service contract is stable.
 
 ## Promotion Rule

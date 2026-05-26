@@ -16,6 +16,7 @@ This document records the factual project state. It should be updated when reali
 - Future runtime work may build on validated polling lifecycle semantics after a durable runtime direction is separately chosen.
 - Future companion expression may build on validated signal mappings only after product behavior is separately approved.
 - Future companion expression may use signal UX findings only after vocabulary, runtime direction, and product behavior are separately approved.
+- Future companion temporal attention behavior may use timing findings only after product behavior and human visual review are separately approved.
 
 ## Implemented
 
@@ -30,6 +31,7 @@ This document records the factual project state. It should be updated when reali
 - Experiment-local runtime/service lifecycle bridge validation under `experiments/`.
 - Experiment-local runtime signal mapping for simple labels, glyphs, reasons, and CSS tone changes.
 - Experiment-local runtime signal UX metadata and CSS-only visual priority refinements.
+- Experiment-local runtime temporal signal timing for persistence, fade, escalation, recovery, and cooldown.
 - Discovery of local Codex source locations under the configured Codex home.
 - JSONL parsing with malformed-line accounting.
 - SQLite inspection through Node `node:sqlite` using read-only immutable URI mode.
@@ -43,6 +45,7 @@ Not implemented:
 - No durable UI/runtime architecture; the terminal and browser diagnostics surfaces are disposable contract-validation tooling.
 - No Godot, Aseprite, overlay, tray, pet/avatar runtime, desktop hook, durable runtime prototype, or asset pipeline.
 - No personality, dialogue, lore, memory, behavior tree, AI agent behavior, or pet logic.
+- No animation framework, behavior tree/state-machine framework, temporal product behavior, or companion attention model.
 - The Electron spike is disposable experiment code only; it is not a product runtime or HUD implementation.
 - Electron is viable for further isolated HUD/runtime shell experimentation, but runtime choice remains undecided.
 - No Kamay main, Kamay Adapter, Kamay-X, or Kamay Buddy integration exists yet.
@@ -63,6 +66,7 @@ Not implemented:
 - Runtime lifecycle bridge behavior is validated through an experiment-local harness, not root service architecture changes.
 - Runtime signal mapping is validated through an experiment-local harness, not root service architecture changes.
 - Runtime signal UX priority and persistence behavior is validated through an experiment-local harness, not root service architecture changes.
+- Runtime temporal signal behavior is validated through an experiment-local harness, not root service architecture changes.
 
 ## Deploy-ready
 
@@ -90,6 +94,7 @@ Not implemented:
 - Runtime lifecycle validation demonstrates startup-before-service, startup-after-service, reconnect, offline/null snapshot, stale, degraded/recovered, real-service compatibility, and multi-consumer polling behavior as experiment findings.
 - Runtime signal validation maps `idle`, `active`, `degraded`, `offline`, `reconnecting`, `stale`, `error`, and `unknown` as experiment findings only.
 - Runtime signal UX validation covers priority ordering, persistence timing, higher-priority interruption, and conservative visual treatment as experiment findings only.
+- Runtime temporal signal validation covers fade, escalation, recovery, cooldown, and calm active/idle behavior as experiment findings only.
 
 ## Update Rule
 
