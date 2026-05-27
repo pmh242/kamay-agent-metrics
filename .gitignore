@@ -1,2 +1,7 @@
 dist/
 node_modules/
+agent-lab/screenshots/
+agent-lab/logs/
+agent-lab/traces/
+agent-lab/reports/
+agent-lab/scratch/
