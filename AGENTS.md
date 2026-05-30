@@ -18,11 +18,19 @@ This repository is a local PoC for provider-agnostic agent metrics. It is not pr
 
 ## Goal / Plan / Task Permission Doctrine
 
-- A **Goal** gives durable direction, not ongoing execution authorization.
-- A **Plan** gives reasoning, sequencing, and scoped interpretation.
-- A **Task** is the only permission to execute.
-- Do not continue a broader goal, recommended next action, or adjacent plan after the approved task is complete unless a new task explicitly authorizes it.
-- Mandatory hard stop: after completing the approved task, validate, report, and stop.
+- A **Goal** gives direction.
+- A **Plan** gives structure.
+- A **Task** gives permission.
+- `/goal` is durable direction; it does not authorize autonomous continuation.
+- `/plan` is reasoning, sequencing, and scoped interpretation; it does not authorize execution by itself.
+- All implementation requires an explicit task contract.
+- Default execution budget is max 1 implementation slice, max 1 commit, no new subsystems, no architecture expansion, no adjacent feature passes, and no opportunistic cleanup or refactors.
+- If scope is ambiguous or drift risk appears, stop and escalate.
+- Mandatory hard stop: after completing the approved task, validate, report, and stop. If no explicit next task exists, STOP.
+
+## Task Contract
+
+Execution tasks should define: `TASK ID`, `MODE`, `GOAL`, `CONTEXT`, `SCOPE`, `CONSTRAINTS`, `STOP CONDITION`, `VALIDATION`, and `RETURN FORMAT`.
 
 ## Workflow
 
@@ -61,5 +69,6 @@ pnpm test
 - Report exact commands run and whether each passed.
 - Separate smoke test results from QA pass results.
 - State whether files changed are docs-only, source/runtime, experiment-local, or tooling.
+- Use the required operational report fields when requested: `BREADCRUMB`, `RESULT`, `STATE SUMMARY`, `FILES CHANGED`, `SUMMARY OF CHANGES`, `VALIDATION RESULTS`, `SECURITY / DATA IMPACT`, `COMMIT / PUSH`, `ROLLBACK`, `RISKS / FOLLOW-UP`, and `RULE`.
 - Do not claim deployed, verified, production-ready, or client-ready status unless that evidence exists.
 - Do not commit or push unless the task explicitly asks for it.

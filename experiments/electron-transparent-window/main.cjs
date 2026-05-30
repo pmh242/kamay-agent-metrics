@@ -13,10 +13,10 @@ function createWindow() {
   Menu.setApplicationMenu(null);
 
   windowRef = new BrowserWindow({
-    width: 380,
-    height: 260,
-    minWidth: 320,
-    minHeight: 220,
+    width: 300,
+    height: 172,
+    minWidth: 260,
+    minHeight: 140,
     transparent: true,
     frame: false,
     alwaysOnTop: true,
@@ -99,6 +99,13 @@ ipcMain.handle("metrics-current:fetch", async () => {
       error: error instanceof Error ? error.message : String(error)
     };
   }
+});
+
+ipcMain.handle("runtime-window:close", () => {
+  logLifecycleEvent({
+    event: "runtime-close-requested"
+  });
+  app.quit();
 });
 
 app.whenReady().then(createWindow);

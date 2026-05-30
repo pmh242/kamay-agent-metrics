@@ -23,6 +23,8 @@ Use local artifacts when they make validation easier to understand or reproduce:
 
 These folders are ignored by default. Do not create tracked placeholder directories. Do not commit artifacts unless a task explicitly approves a specific artifact for review.
 
+For human runtime UX checks, use `docs/implementation/manual-runtime-ux-review.md` as the local review checklist and observation format.
+
 ## Artifact Safety
 
 Artifacts must not include:

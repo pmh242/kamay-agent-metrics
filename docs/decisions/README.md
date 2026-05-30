@@ -37,6 +37,8 @@ YYYY-MM-DD-short-title.md
 - [2026-05-26: Runtime Signal Mapping Experiment](2026-05-26-runtime-signal-mapping-experiment.md)
 - [2026-05-26: Runtime Signal UX Experiment](2026-05-26-runtime-signal-ux-experiment.md)
 - [2026-05-26: Runtime Temporal Signal Experiment](2026-05-26-runtime-temporal-signal-experiment.md)
+- [2026-05-27: Kamay Buddy Core Thesis](2026-05-27-kamay-buddy-core-thesis.md)
+- [2026-05-28: Aseprite-first Embodiment Direction](2026-05-28-aseprite-first-embodiment-direction.md)
 
 Known project direction from the baseline:
 

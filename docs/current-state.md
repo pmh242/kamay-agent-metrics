@@ -10,6 +10,7 @@ This document records the factual project state. It should be updated when reali
 - Incremental delivery through a narrow MVP before provider-specific extensions.
 - Future HUD work after the read-only discovery assumptions are validated further.
 - Future ecosystem alignment with Kamay main, Kamay Adapter, Kamay-X, and Kamay Buddy after local service boundaries stabilize.
+- Future Kamay Buddy systems may use this repository as a telemetry/service proving ground for the Operational Spine, but this repository is not the full Kamay Buddy product.
 - Future Kamay Buddy runtime evaluation across Electron, Godot, hybrid, 2D, 2.5D, and Aseprite-informed asset workflows.
 - Future runtime spike findings may inform Kamay Buddy direction after they are documented and reviewed.
 - Future human visual verification of Electron transparent-window behavior on target desktop environments.
@@ -27,6 +28,7 @@ This document records the factual project state. It should be updated when reali
 - Service-owned polling lifecycle for snapshot refresh.
 - Disposable terminal diagnostics consumer that reads only the local service endpoint.
 - Docs-only Kamay Buddy runtime evaluation posture.
+- Docs-only Kamay Buddy core thesis as durable product-direction guidance.
 - Isolated disposable Electron transparent-window runtime spike under `experiments/`.
 - Experiment-local runtime/service lifecycle bridge validation under `experiments/`.
 - Experiment-local runtime signal mapping for simple labels, glyphs, reasons, and CSS tone changes.
@@ -45,6 +47,7 @@ Not implemented:
 - No durable UI/runtime architecture; the terminal and browser diagnostics surfaces are disposable contract-validation tooling.
 - No Godot, Aseprite, overlay, tray, pet/avatar runtime, desktop hook, durable runtime prototype, or asset pipeline.
 - No personality, dialogue, lore, memory, behavior tree, AI agent behavior, or pet logic.
+- No general AI assistant, chatbot shell, autonomous agent platform, companion interface, or interchangeable avatar embodiment layer.
 - No animation framework, behavior tree/state-machine framework, temporal product behavior, or companion attention model.
 - The Electron spike is disposable experiment code only; it is not a product runtime or HUD implementation.
 - Electron is viable for further isolated HUD/runtime shell experimentation, but runtime choice remains undecided.

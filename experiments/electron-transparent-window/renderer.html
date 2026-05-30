@@ -27,40 +27,42 @@
         box-sizing: border-box;
         width: 100vw;
         min-height: 100vh;
-        padding: 14px;
+        padding: 10px;
         border: 1px solid rgba(255, 255, 255, 0.22);
-        border-radius: 18px;
-        background: rgba(14, 18, 24, 0.76);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
-        backdrop-filter: blur(14px);
-        opacity: 0.94;
-        transition: opacity 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        border-radius: 14px;
+        background: rgba(14, 18, 24, 0.62);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
+        backdrop-filter: blur(12px);
+        opacity: 0.86;
+        transition: opacity 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
       }
 
       main.tone-good {
-        box-shadow: 0 0 22px rgba(70, 190, 130, 0.34), 0 18px 40px rgba(0, 0, 0, 0.34);
+        box-shadow: 0 0 12px rgba(70, 190, 130, 0.18), 0 12px 28px rgba(0, 0, 0, 0.26);
       }
 
       main.tone-warn {
-        box-shadow: 0 0 20px rgba(238, 180, 72, 0.32), 0 18px 40px rgba(0, 0, 0, 0.34);
+        background: rgba(24, 20, 12, 0.78);
+        box-shadow: 0 0 20px rgba(238, 180, 72, 0.34), 0 14px 32px rgba(0, 0, 0, 0.34);
       }
 
       main.tone-bad {
-        opacity: 0.82;
-        box-shadow: 0 0 20px rgba(220, 86, 96, 0.36), 0 18px 40px rgba(0, 0, 0, 0.34);
+        opacity: 0.98;
+        background: rgba(28, 14, 18, 0.84);
+        box-shadow: 0 0 22px rgba(220, 86, 96, 0.42), 0 14px 34px rgba(0, 0, 0, 0.38);
       }
 
       main.weight-quiet {
-        opacity: 0.76;
+        opacity: 0.68;
         border-color: rgba(255, 255, 255, 0.14);
       }
 
       main.weight-calm {
-        opacity: 0.9;
+        opacity: 0.78;
       }
 
       main.weight-visible {
-        opacity: 0.96;
+        opacity: 0.94;
         border-color: rgba(255, 255, 255, 0.3);
       }
 
@@ -79,12 +81,12 @@
 
       main.phase-escalated {
         border-color: rgba(255, 255, 255, 0.58);
-        box-shadow: 0 0 28px rgba(255, 210, 122, 0.34), 0 18px 40px rgba(0, 0, 0, 0.34);
+        box-shadow: 0 0 30px rgba(255, 210, 122, 0.42), 0 14px 36px rgba(0, 0, 0, 0.38);
       }
 
       main.phase-recovered {
         border-color: rgba(130, 220, 170, 0.54);
-        box-shadow: 0 0 22px rgba(70, 190, 130, 0.32), 0 18px 40px rgba(0, 0, 0, 0.34);
+        box-shadow: 0 0 20px rgba(70, 190, 130, 0.28), 0 12px 28px rgba(0, 0, 0, 0.3);
       }
 
       main.phase-cooldown {
@@ -97,19 +99,27 @@
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
+      }
+
+      .chrome {
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
 
       h1 {
         margin: 0;
-        font-size: 15px;
+        color: #cbd6e2;
+        font-size: 11px;
         font-weight: 650;
+        letter-spacing: 0;
       }
 
       .status {
         border-radius: 999px;
-        padding: 3px 8px;
-        font-size: 11px;
+        padding: 2px 7px;
+        font-size: 10px;
         font-weight: 700;
         text-transform: uppercase;
       }
@@ -118,38 +128,188 @@
       .degraded { background: #8b6716; }
       .offline { background: #8a2f38; }
 
+      .close {
+        display: grid;
+        width: 18px;
+        height: 18px;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        color: #cbd6e2;
+        cursor: pointer;
+        font-size: 13px;
+        line-height: 1;
+      }
+
+      .close:hover,
+      .close:focus-visible {
+        border-color: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.16);
+        outline: none;
+      }
+
       .signal {
         display: grid;
-        grid-template-columns: 42px 1fr;
-        gap: 10px;
+        grid-template-columns: 34px 1fr 42px;
+        gap: 8px;
         align-items: center;
-        margin-bottom: 12px;
+        margin-bottom: 6px;
+      }
+
+      .embodiment {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: end center;
+        opacity: var(--sprite-opacity, 0.72);
+        filter: drop-shadow(0 0 var(--sprite-glow-size, 4px) var(--sprite-glow, rgba(150, 190, 220, 0.2)));
+        transition: opacity 180ms ease, filter 180ms ease, transform 180ms ease;
+      }
+
+      .sprite {
+        position: relative;
+        width: 24px;
+        height: 28px;
+        transform-origin: bottom center;
+        animation: sprite-breathe var(--sprite-cadence, 1600ms) ease-in-out infinite;
+      }
+
+      .sprite::before,
+      .sprite::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .sprite::before {
+        bottom: 5px;
+        width: 18px;
+        height: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 8px 8px 7px 7px;
+        background: var(--sprite-body, #6f8298);
+        box-shadow:
+          inset 0 5px 0 rgba(255, 255, 255, 0.1),
+          0 0 0 2px rgba(0, 0, 0, 0.12);
+      }
+
+      .sprite::after {
+        bottom: 20px;
+        width: 14px;
+        height: 10px;
+        border-radius: 7px 7px 4px 4px;
+        background: var(--sprite-head, #9aaabe);
+        box-shadow:
+          -5px 11px 0 -3px var(--sprite-arm, #8190a4),
+          5px 11px 0 -3px var(--sprite-arm, #8190a4),
+          -3px 23px 0 -3px var(--sprite-foot, #59687a),
+          3px 23px 0 -3px var(--sprite-foot, #59687a);
+      }
+
+      .sprite-shadow {
+        width: 26px;
+        height: 5px;
+        margin-top: -2px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.24);
+      }
+
+      .embodiment[data-state="idle"],
+      .embodiment[data-state="active"] {
+        --sprite-glow-size: 5px;
+        --sprite-glow: rgba(95, 180, 140, 0.2);
+        --sprite-body: #6e8794;
+        --sprite-head: #a8b9bd;
+        --sprite-arm: #748c98;
+        --sprite-foot: #53656f;
+      }
+
+      .embodiment[data-state="degraded"],
+      .embodiment[data-state="stale"],
+      .embodiment[data-state="reconnecting"] {
+        --sprite-glow-size: 9px;
+        --sprite-glow: rgba(255, 204, 96, 0.42);
+        --sprite-body: #9a7d41;
+        --sprite-head: #d6b86a;
+        --sprite-arm: #ac8b48;
+        --sprite-foot: #695932;
+      }
+
+      .embodiment[data-state="offline"],
+      .embodiment[data-state="error"],
+      .embodiment[data-state="unknown"] {
+        --sprite-glow-size: 10px;
+        --sprite-glow: rgba(255, 112, 125, 0.48);
+        --sprite-body: #8d4d58;
+        --sprite-head: #c07a82;
+        --sprite-arm: #9e5b63;
+        --sprite-foot: #65363d;
+      }
+
+      .embodiment[data-motion="steady"] .sprite {
+        animation-name: sprite-steady;
+      }
+
+      .embodiment[data-motion="tense"] .sprite,
+      .embodiment[data-motion="scan"] .sprite {
+        animation-name: sprite-tense;
+      }
+
+      .embodiment[data-motion="low"] .sprite {
+        animation-name: sprite-low;
+      }
+
+      @keyframes sprite-breathe {
+        0%, 100% { transform: translateY(0) scaleY(1); }
+        50% { transform: translateY(-1px) scaleY(1.03); }
+      }
+
+      @keyframes sprite-steady {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-2px); }
+      }
+
+      @keyframes sprite-tense {
+        0%, 100% { transform: translateX(0); }
+        35% { transform: translateX(-1px); }
+        70% { transform: translateX(1px); }
+      }
+
+      @keyframes sprite-low {
+        0%, 100% { transform: translateY(1px) scaleY(0.96); }
+        50% { transform: translateY(0) scaleY(1); }
       }
 
       .glyph {
         display: grid;
-        width: 34px;
-        height: 34px;
+        width: 28px;
+        height: 28px;
         place-items: center;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.12);
         border: 1px solid rgba(255, 255, 255, 0.22);
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 800;
         transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
       }
 
       .signal-title {
         margin: 0;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 700;
       }
 
       .signal-reason {
         margin: 2px 0 0;
         color: #b7c2d0;
-        font-size: 11px;
+        font-size: 10px;
         line-height: 1.3;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
       }
 
       .tone-good .glyph { color: #9ff0bd; }
@@ -186,17 +346,33 @@
         padding: 1px 6px;
         background: rgba(255, 255, 255, 0.1);
         color: #d7e0ea;
-        font-size: 10px;
+        font-size: 9px;
         font-weight: 700;
         text-transform: uppercase;
       }
 
       dl {
         display: grid;
-        grid-template-columns: 104px 1fr;
-        gap: 7px 10px;
+        grid-template-columns: 74px 1fr;
+        gap: 4px 8px;
+        max-height: 0;
         margin: 0;
-        font-size: 12px;
+        overflow: hidden;
+        border-top: 1px solid transparent;
+        color: #cbd6e2;
+        font-size: 10px;
+        opacity: 0;
+        transition: max-height 180ms ease, opacity 180ms ease, margin-top 180ms ease, padding-top 180ms ease, border-color 180ms ease;
+      }
+
+      main:hover dl,
+      main:focus-within dl,
+      main.detail-visible dl {
+        max-height: 88px;
+        margin-top: 8px;
+        padding-top: 8px;
+        border-color: rgba(255, 255, 255, 0.12);
+        opacity: 1;
       }
 
       dt {
@@ -212,9 +388,19 @@
       }
 
       .warnings {
-        margin-top: 12px;
+        min-height: 14px;
+        margin-top: 5px;
         color: #ffd27a;
-        font-size: 12px;
+        font-size: 10px;
+        line-height: 1.25;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      main.weight-quiet .warnings,
+      main.weight-calm .warnings {
+        color: #98a6b6;
       }
     </style>
   </head>
@@ -222,7 +408,10 @@
     <main id="surface" class="tone-neutral">
       <header>
         <h1>Kamay Runtime Spike</h1>
-        <span id="state" class="status offline">starting</span>
+        <div class="chrome">
+          <span id="state" class="status offline">starting</span>
+          <button id="closeButton" class="close" type="button" aria-label="Close runtime">×</button>
+        </div>
       </header>
       <section class="signal" aria-label="Runtime signal">
         <div id="signalGlyph" class="glyph">UN</div>
@@ -230,11 +419,18 @@
           <p class="signal-title"><span id="signalLabel">Unknown</span><span id="signalPriority" class="priority">P4</span></p>
           <p id="signalReason" class="signal-reason">Waiting for first metrics poll.</p>
         </div>
+        <div id="embodiment" class="embodiment" data-state="idle" data-motion="breathe" aria-label="Operational sprite embodiment" title="Operational sprite embodiment">
+          <div>
+            <div class="sprite" aria-hidden="true"></div>
+            <div class="sprite-shadow" aria-hidden="true"></div>
+          </div>
+        </div>
       </section>
       <dl id="metrics"></dl>
       <div id="warnings" class="warnings"></div>
     </main>
     <script src="./signalMapper.js"></script>
+    <script src="./spriteEmbodiment.js"></script>
     <script>
       const CONTRACT_VERSION = "metrics.current.v1";
       const POLL_INTERVAL_MS = 2000;
@@ -249,6 +445,8 @@
       const signalReason = document.querySelector("#signalReason");
       const metrics = document.querySelector("#metrics");
       const warnings = document.querySelector("#warnings");
+      const closeButton = document.querySelector("#closeButton");
+      const embodiment = document.querySelector("#embodiment");
 
       function renderRows(rows) {
         metrics.replaceChildren(...rows.flatMap(([label, value]) => {
@@ -269,11 +467,24 @@
         const rawSignal = window.kamaySignalMapper.mapRuntimeSignal(response, signalMemory);
         const uxSignal = window.kamaySignalMapper.applySignalUx(rawSignal, signalUxMemory, Date.now());
         const signal = window.kamaySignalMapper.applyTemporalSignalTiming(uxSignal, temporalSignalMemory, Date.now());
-        surface.className = `tone-${signal.tone} weight-${signal.temporalWeight} attention-${signal.temporalAttentionStyle} phase-${signal.temporalPhase}`;
+        const detailVisible = signal.priority >= 3 || signal.temporalPhase === "escalated" || signal.temporalPhase === "recovered";
+        surface.className = `tone-${signal.tone} weight-${signal.temporalWeight} attention-${signal.temporalAttentionStyle} phase-${signal.temporalPhase}${detailVisible ? " detail-visible" : ""}`;
+        surface.dataset.signal = signal.signal;
         signalGlyph.textContent = signal.glyph;
         signalLabel.textContent = signal.label;
         signalPriority.textContent = `P${signal.priority}`;
         signalReason.textContent = describeSignalReason(signal);
+        renderEmbodiment(signal);
+      }
+
+      function renderEmbodiment(signal) {
+        const sprite = window.kamaySpriteEmbodiment.mapSignalToEmbodiment(signal);
+        embodiment.dataset.state = sprite.state;
+        embodiment.dataset.motion = sprite.motion;
+        embodiment.dataset.intensity = sprite.intensity;
+        embodiment.style.setProperty("--sprite-cadence", `${sprite.cadenceMs}ms`);
+        embodiment.style.setProperty("--sprite-opacity", String(sprite.opacity));
+        embodiment.title = `${sprite.label} embodiment`;
       }
 
       function describeSignalReason(signal) {
@@ -353,6 +564,10 @@
         renderSignal(response);
         renderResponse(response);
       }
+
+      closeButton.addEventListener("click", () => {
+        window.kamayMetrics.close();
+      });
 
       refresh();
       setInterval(refresh, POLL_INTERVAL_MS);

@@ -14,6 +14,10 @@ Kamay Agent Metrics is the independent short-term telemetry and service proving 
 
 This is ecosystem intent only. No Kamay main, Kamay Adapter, Kamay-X, or Kamay Buddy code is imported or integrated in the current repository.
 
+The Kamay Buddy product thesis is recorded in `docs/kamay-buddy-thesis.md`. In that thesis, this repository contributes to the future Operational Spine: service-first telemetry, normalization, contracts, and safe operational state interpretation. Ambient runtime signaling, interchangeable avatar embodiment, and companion interface work must remain separated from provider discovery and service ownership.
+
+The embodiment direction is Aseprite-first 2D for near-term avatar exploration. 2.5D and 3D remain future-compatible alternatives, but the operational telemetry/service core must not depend on Aseprite, Godot, Blender, assets, or avatar runtimes.
+
 ## Target Boundaries
 
 Kamay Agent Metrics is expected to use a local, provider-agnostic pipeline:
@@ -67,11 +71,15 @@ Kamay Buddy runtime evaluation is now documented as research only. Electron, God
 
 The likely near-term posture is service-first and hybrid-friendly: keep telemetry discovery, normalization, polling, and `metrics.current.v1` independent; evaluate browser or Electron-style surfaces for diagnostics and controls; evaluate Godot, 2D/2.5D, and Aseprite-informed workflows only for future companion presence if product needs justify that complexity.
 
+Metrics and information panels are functional UI. Avatar embodiment is the reactive and expressive layer, consuming interpreted signals from the service/runtime boundary without owning telemetry discovery.
+
 Runtime surfaces must consume the versioned service endpoint, must not parse provider files directly, and must not own provider-specific telemetry logic.
 
 Runtime spikes may live under `experiments/` when explicitly approved. Findings from those spikes can inform future Kamay Buddy direction, but experiment code should remain disposable until a separate decision promotes a runtime path.
 
 Godot, 2D, 2.5D, and Aseprite-informed workflows remain future exploration paths. They are not displaced by the Electron spike.
+
+Aseprite-first 2D is the default near-term embodiment path because it is the fastest constrained route for sprite-based expression. 2.5D or 3D should be considered only if future evidence shows depth, camera, lighting, rigging, or scene complexity is necessary.
 
 Polling remains the approved runtime/service bridge until a later decision proves realtime infrastructure is necessary. WebSockets, event buses, runtime-owned telemetry state, and orchestration frameworks are not part of the current architecture.
 
@@ -81,6 +89,8 @@ Signal UX findings may inform attention design, but runtime surfaces must remain
 
 Temporal signal findings may inform future attention behavior, but time-based escalation and recovery must remain experiment-local until human visual review and product direction justify promotion.
 
+Kamay Buddy is not a general AI assistant, chatbot shell, or autonomous agent platform. Personality, memory, dialogue, lore, autonomous companion behavior, and interchangeable avatar embodiment remain future product decisions until the ambient operational model proves useful.
+
 ## Boundary Rules
 
 - Collectors and adapters may know about provider-specific formats.
@@ -88,6 +98,7 @@ Temporal signal findings may inform future attention behavior, but time-based es
 - The HUD should not parse raw provider telemetry.
 - Future consumers should not own telemetry polling.
 - Future consumers should use the versioned service endpoint rather than parsing provider files directly.
+- Avatar embodiment consumes interpreted signals; it does not own provider discovery, telemetry polling, normalization, or persistence.
 - Storage or state should start local and minimal.
 - Cross-process services, background daemons, cloud sync, and deployment targets are out of scope until separately decided.
 - Ecosystem integration must wait until the local service boundary and snapshot contract are stable.

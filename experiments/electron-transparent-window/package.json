@@ -5,12 +5,15 @@
   "description": "Disposable Electron transparent-window runtime spike for Kamay Buddy direction research.",
   "main": "main.cjs",
   "scripts": {
+    "launch": "node run.cjs",
+    "run": "node run.cjs",
     "start": "electron .",
     "smoke": "node smoke.cjs",
     "lifecycle": "node lifecycle.cjs",
     "signals": "node signals.cjs",
     "signal-ux": "node signalUx.cjs",
-    "temporal-signals": "node temporalSignals.cjs"
+    "temporal-signals": "node temporalSignals.cjs",
+    "embodiment": "node embodiment.cjs"
   },
   "devDependencies": {
     "electron": "42.2.0"

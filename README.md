@@ -84,6 +84,7 @@ The consumer reads only `GET /metrics/current`, renders plain terminal text, and
 - [Current State](docs/current-state.md): factual status of what is planned, implemented, tested, deploy-ready, deployed, and verified.
 - [Principles](docs/principles.md): constraints that keep the project provider-agnostic, read-only, privacy-safe, and incremental.
 - [Architecture](docs/architecture.md): target boundaries and component responsibilities, without claiming they exist yet.
+- [Kamay Buddy Thesis](docs/kamay-buddy-thesis.md): durable long-term product-direction source of truth.
 - [Codex Telemetry PoC](docs/implementation/codex-telemetry-poc.md): observed local sources, allowlist, denied fields, and unstable assumptions.
 - [Local Metrics Service](docs/implementation/local-metrics-service.md): localhost service behavior and versioned `/metrics/current` contract.
 - [Browser Diagnostics UI](docs/implementation/browser-diagnostics-ui.md): disposable static visual diagnostics page served by the local service.
