@@ -25,22 +25,24 @@
       label: "Idle",
       frameRow: SPRITE_SHEET.rows.idle,
       frameLoop: [0, 1],
-      cadenceMs: 1600,
+      cadenceMs: 2200,
       intensity: "quiet",
       motion: "breathe",
       glow: "low",
-      opacity: 0.62
+      opacity: 0.48,
+      scale: 0.88
     },
     active: {
       state: "active",
       label: "Active",
       frameRow: SPRITE_SHEET.rows.active,
       frameLoop: [0, 1, 2],
-      cadenceMs: 1200,
+      cadenceMs: 1800,
       intensity: "calm",
       motion: "steady",
       glow: "soft",
-      opacity: 0.78
+      opacity: 0.64,
+      scale: 0.92
     },
     degraded: {
       state: "degraded",
@@ -51,7 +53,8 @@
       intensity: "watch",
       motion: "tense",
       glow: "warn",
-      opacity: 0.92
+      opacity: 0.9,
+      scale: 1
     },
     reconnecting: {
       state: "reconnecting",
@@ -62,7 +65,8 @@
       intensity: "watch",
       motion: "scan",
       glow: "warn",
-      opacity: 0.9
+      opacity: 0.92,
+      scale: 1.02
     },
     offline: {
       state: "offline",
@@ -73,7 +77,8 @@
       intensity: "strong",
       motion: "low",
       glow: "bad",
-      opacity: 0.96
+      opacity: 0.98,
+      scale: 1.06
     }
   };
 

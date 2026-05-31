@@ -151,8 +151,8 @@
 
       .signal {
         display: grid;
-        grid-template-columns: 34px 1fr 42px;
-        gap: 8px;
+        grid-template-columns: 42px 1fr 30px;
+        gap: 9px;
         align-items: center;
         margin-bottom: 6px;
       }
@@ -164,6 +164,7 @@
         place-items: end center;
         opacity: var(--sprite-opacity, 0.72);
         filter: drop-shadow(0 0 var(--sprite-glow-size, 4px) var(--sprite-glow, rgba(150, 190, 220, 0.2)));
+        transform: scale(var(--sprite-scale, 1));
         transition: opacity 180ms ease, filter 180ms ease, transform 180ms ease;
       }
 
@@ -218,8 +219,8 @@
 
       .embodiment[data-state="idle"],
       .embodiment[data-state="active"] {
-        --sprite-glow-size: 5px;
-        --sprite-glow: rgba(95, 180, 140, 0.2);
+        --sprite-glow-size: 3px;
+        --sprite-glow: rgba(95, 180, 140, 0.14);
         --sprite-body: #6e8794;
         --sprite-head: #a8b9bd;
         --sprite-arm: #748c98;
@@ -250,6 +251,21 @@
 
       .embodiment[data-motion="steady"] .sprite {
         animation-name: sprite-steady;
+      }
+
+      .phase-faded .embodiment,
+      .phase-cooldown .embodiment {
+        transform: scale(calc(var(--sprite-scale, 1) * 0.96));
+        filter: saturate(0.86) drop-shadow(0 0 var(--sprite-glow-size, 4px) var(--sprite-glow, rgba(150, 190, 220, 0.2)));
+      }
+
+      .phase-escalated .embodiment {
+        transform: scale(calc(var(--sprite-scale, 1) * 1.04));
+      }
+
+      .phase-recovered .embodiment {
+        --sprite-glow-size: 7px;
+        --sprite-glow: rgba(115, 220, 160, 0.34);
       }
 
       .embodiment[data-motion="tense"] .sprite,
@@ -414,17 +430,17 @@
         </div>
       </header>
       <section class="signal" aria-label="Runtime signal">
-        <div id="signalGlyph" class="glyph">UN</div>
-        <div>
-          <p class="signal-title"><span id="signalLabel">Unknown</span><span id="signalPriority" class="priority">P4</span></p>
-          <p id="signalReason" class="signal-reason">Waiting for first metrics poll.</p>
-        </div>
         <div id="embodiment" class="embodiment" data-state="idle" data-motion="breathe" aria-label="Operational sprite embodiment" title="Operational sprite embodiment">
           <div>
             <div class="sprite" aria-hidden="true"></div>
             <div class="sprite-shadow" aria-hidden="true"></div>
           </div>
         </div>
+        <div>
+          <p class="signal-title"><span id="signalLabel">Unknown</span><span id="signalPriority" class="priority">P4</span></p>
+          <p id="signalReason" class="signal-reason">Waiting for first metrics poll.</p>
+        </div>
+        <div id="signalGlyph" class="glyph">UN</div>
       </section>
       <dl id="metrics"></dl>
       <div id="warnings" class="warnings"></div>
@@ -484,6 +500,7 @@
         embodiment.dataset.intensity = sprite.intensity;
         embodiment.style.setProperty("--sprite-cadence", `${sprite.cadenceMs}ms`);
         embodiment.style.setProperty("--sprite-opacity", String(sprite.opacity));
+        embodiment.style.setProperty("--sprite-scale", String(sprite.scale));
         embodiment.title = `${sprite.label} embodiment`;
       }
 
